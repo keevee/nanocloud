@@ -17,6 +17,7 @@ gem 'rspec-rails'
 gem 'nanoc'
 gem 'haml'
 gem 'kramdown'# ,   '~>0.13'
+gem 'aws-s3'
 
 
 # Gems used only for assets and not required
