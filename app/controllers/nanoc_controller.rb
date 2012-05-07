@@ -10,7 +10,8 @@ class NanocController < ApplicationController
       }]
     })
     begin
-      render :text => site.compile
+      site.compile
+      render :text => File.read('tmp/test/index.html')
     rescue Exception => e
       render :text => "EXCEPTION: #{e}"
     end
