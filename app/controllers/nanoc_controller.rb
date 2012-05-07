@@ -1,7 +1,7 @@
 class NanocController < ApplicationController
   def compile
     site = Nanoc::Site.new({
-      :output_dir   => 'tmp',
+      :output_dir   => 'tmp/nanoc_output',
       :data_sources => [{
         :type         => 'filesystem_unified',
         :items_root   => '/',
@@ -15,13 +15,13 @@ class NanocController < ApplicationController
       Rails.logger.warn content
 
       AWS::S3::Base.establish_connection!(
-        :access_key_id     => ENV['ACCESS_KEY_ID'],
+        :access_key_id     => ENV['AWS_ACCESS_KEY_ID'],
         :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
       )
 
       AWS::S3::Bucket.find 'nanoccer'
 
-      Dir["tmp/*"].each do |file|
+      Dir["tmp/nanoc_output/*"].each do |file|
         # Don't upload this file!
         if file != __FILE__
           Rails.logger.warn "Uploading #{file}.."
