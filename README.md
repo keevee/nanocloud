@@ -6,4 +6,4 @@ It should run on heroku and allow for in- and output to amazons S3 service.
 
 Prerequisites
 =============
-ENV['AWS_ACCESS_KEY_ID'] and ENV['AWS_SECRET_ACCESS_KEY'] must be set to valid values.
+<code>ENV['AWS_ACCESS_KEY_ID']</code> and <code>ENV['AWS_SECRET_ACCESS_KEY']</code> must be set to valid values.
