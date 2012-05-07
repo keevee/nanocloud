@@ -11,7 +11,8 @@ class NanocController < ApplicationController
     })
     begin
       site.compile
-      # render :text => File.read('tmp/test/index.html')
+      content = File.read('tmp/test/index.html')
+      Rails.logger.warn content
       render :text => 'holla'
     rescue Exception => e
       render :text => "EXCEPTION: #{e}"
