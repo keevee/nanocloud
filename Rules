@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+compile '*' do
+  filter :kramdown
+  layout 'default'
+end
+
+route '*' do
+  item.identifier + 'index.html'
+end
+
+layout '*', :haml
