@@ -43,7 +43,7 @@ module S3File
   end
 
   # Copy one file/dir from the system, recurssing if needed. Used for non-Ruby style globs
-  def self.copy_one_file_or_dir name, base_dir, bucket, opts = {}
+  def self.copy name, base_dir, bucket, opts = {}
     opts.reverse_merge!({
       :deep           => true,
       :modified_only  => false,
@@ -62,7 +62,7 @@ module S3File
 
     if opts[:deep] && fstat.directory?
       my_base = file_name + '/'
-      Dir.foreach(my_base) { |e| copy_one_file_or_dir(e, my_base, bucket, opts) }
+      Dir.foreach(my_base) { |e| copy(e, my_base, bucket, opts) }
     end
   end
 end

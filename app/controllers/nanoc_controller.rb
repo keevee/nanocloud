@@ -1,3 +1,5 @@
+require 's3_file'
+
 class NanocController < ApplicationController
   def compile
     site = Nanoc::Site.new({
@@ -12,21 +14,8 @@ class NanocController < ApplicationController
     begin
       site.compile
 
-      AWS::S3::Base.establish_connection!(
-        :access_key_id     => ENV['AWS_ACCESS_KEY_ID'],
-        :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-      )
-
-      AWS::S3::Bucket.find 'nanoccer'
-
-      Dir["tmp/nanoc_output/*"].each do |file|
-        content = File.read(file)
-        Rails.logger.warn content
-
-        Rails.logger.warn "Uploading #{file}.."
-        AWS::S3::S3Object.store(file, open(file), 'nanoccer')
-        Rails.logger.warn "done!"
-      end
+      S3File.connect  'nanoccer'
+      S3File.copy     'test', 'tmp/nanoc_output/', 'nanoccer'
 
       render :text => 'uploaded result to s3'
     rescue Exception => e
