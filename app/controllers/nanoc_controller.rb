@@ -11,8 +11,6 @@ class NanocController < ApplicationController
     })
     begin
       site.compile
-      content = File.read('tmp/test/index.html')
-      Rails.logger.warn content
 
       AWS::S3::Base.establish_connection!(
         :access_key_id     => ENV['AWS_ACCESS_KEY_ID'],
@@ -22,12 +20,12 @@ class NanocController < ApplicationController
       AWS::S3::Bucket.find 'nanoccer'
 
       Dir["tmp/nanoc_output/*"].each do |file|
-        # Don't upload this file!
-        if file != __FILE__
-          Rails.logger.warn "Uploading #{file}.."
-          AWS::S3::S3Object.store(file, open(file), 'nanoccer')
-          Rails.logger.warn "done!"
-        end
+        content = File.read(file)
+        Rails.logger.warn content
+
+        Rails.logger.warn "Uploading #{file}.."
+        AWS::S3::S3Object.store(file, open(file), 'nanoccer')
+        Rails.logger.warn "done!"
       end
 
       render :text => 'uploaded result to s3'
