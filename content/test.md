@@ -1,2 +1,0 @@
-Hallo Ballo!
-Klaro Baro.

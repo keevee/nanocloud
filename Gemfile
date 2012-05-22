@@ -1,3 +1,8 @@
+if RUBY_VERSION =~ /1.9/
+  Encoding.default_external = Encoding::UTF_8
+  Encoding.default_internal = Encoding::UTF_8
+end
+
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
@@ -5,7 +10,12 @@ gem 'rails', '3.2.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+if ENV['MY_BUNDLE_ENV'] == "dev"
+  gem 'nanoc', :path => '~/gem/nanoc'
+else
+  gem 'nanoc', :git => 'git@github.com:momolog/nanoc.git'
+  gem 'pg'
+end
 
 group :development do
   gem 'sqlite3'
@@ -13,7 +23,6 @@ end
 
 gem 'rspec-rails'
 
-gem 'nanoc'
 gem 'haml'
 gem 'kramdown'# ,   '~>0.13'
 gem 'aws-s3'
