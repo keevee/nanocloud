@@ -10,12 +10,10 @@ gem 'rails', '3.2.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-if ENV['MY_BUNDLE_ENV'] == "dev"
-  gem 'nanoc', :path => '~/gem/nanoc'
-else
-  gem 'nanoc', :git => 'git@github.com:momolog/nanoc.git'
-  gem 'pg'
-end
+# gem 'nanoc', :path => '~/gem/nanoc'
+gem 'nanoc', :git => 'git@github.com:momolog/nanoc.git', :branch => 's3_data_source'
+
+gem 'pg'
 
 group :development do
   gem 'sqlite3'

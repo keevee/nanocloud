@@ -1,6 +1,7 @@
 GIT
   remote: git@github.com:momolog/nanoc.git
-  revision: cf3bf57e21f0e1a9dbfe739ac6be7c8836886828
+  revision: 1ef2f1da7b2d63411b9e0764a9ada72c920d6830
+  branch: s3_data_source
   specs:
     nanoc (3.4.0)
       cri (~> 2.2)
