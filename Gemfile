@@ -11,8 +11,8 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # gem 'nanoc', :path => '~/gem/nanoc'
-# gem 'nanoc', :git => 'git@github.com:momolog/nanoc.git', :branch => 's3_data_source'
-gem 'nanoc'
+gem 'nanoc', :git => 'git@github.com:momolog/nanoc.git', :branch => 'debug'
+# gem 'nanoc'
 
 gem 'pg'
 
