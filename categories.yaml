@@ -1,0 +1,11 @@
+---
+- key: hotels
+  name: HOTEL
+- key: bueros
+  name: BÜRO
+- key: gewerbe
+  name: GEWERBE
+- key: oeffentlich
+  name: ÖFFENTLICH
+- key: wohnen
+  name: WOHNEN

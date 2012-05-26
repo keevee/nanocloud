@@ -15,3 +15,8 @@
 /tmp
 
 .rvmrc
+.sass-cache
+
+content
+layouts
+output

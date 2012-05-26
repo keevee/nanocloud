@@ -1,18 +1,15 @@
-require 's3_file'
+require 's3_bucket'
 
 class NanocController < ApplicationController
   def compile
     site = Nanoc::Site.new({
       :output_dir   => 'tmp/nanoc_output',
       :data_sources => [
-        # {
-        #   :type         => 'filesystem_unified',
-        #   :items_root   => '/',
-        #   :layouts_root => '/',
-        #   :config       => {} 
-        # },
         {
-          :type   => 's3'
+          :type         => 'filesystem_unified',
+          :items_root   => '/',
+          :layouts_root => '/',
+          :config       => {} 
         }
       ],
       :input_bucket   => 'nanoccer-input',
@@ -20,13 +17,18 @@ class NanocController < ApplicationController
     })
 
     begin
+      input_bucket  = S3Bucket.get site.config[:input_bucket]
+      output_bucket = S3Bucket.get site.config[:output_bucket]
+
+      # input_bucket['content'].copy_to Rails.root.to_s.to_entry['content'], :bang => false
+      # input_bucket['layouts'].copy_to Rails.root.to_s.to_entry['layouts'], :bang => false
+
       site.compile
 
       Rails.logger.warn site
       Rails.logger.warn site.config
 
-      S3File.connect  site.config[:output_bucket]
-      S3File.copy     'nanoc_output', 'tmp/', site.config[:output_bucket]
+      'tmp/nanoc_output'.to_entry.copy_to output_bucket['']
 
       render :text => 'uploaded result to s3'
     rescue Exception => e

@@ -11,7 +11,8 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # gem 'nanoc', :path => '~/gem/nanoc'
-gem 'nanoc', :git => 'git@github.com:momolog/nanoc.git', :branch => 's3_data_source'
+# gem 'nanoc', :git => 'git@github.com:momolog/nanoc.git', :branch => 's3_data_source'
+gem 'nanoc'
 
 gem 'pg'
 
@@ -22,9 +23,23 @@ end
 gem 'rspec-rails'
 
 gem 'haml'
-gem 'kramdown'# ,   '~>0.13'
-gem 'aws-s3'
+gem 'aws-sdk'
+gem 'vos'
 
+# filters etc
+gem 'maruku'
+gem 'kramdown',   '~>0.13'
+gem 'deadweight', '~>0.2'
+gem 'rainpress',  '~>1.0'
+gem 'typogruby',  '~>1.0'
+gem 'jsmin',      '~>1.0'
+gem 'rack',       '~>1.2'
+gem 'adsf',       '~>1.0'
+gem 'nanoc-cachebuster'
+gem 'coffee-script'
+gem 'sass',       '~>3.1'
+gem 'haml'
+gem 'mime-types'
 
 # Gems used only for assets and not required
 # in production environments by default.

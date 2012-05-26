@@ -1,12 +1,85 @@
 #!/usr/bin/env ruby
 
-compile '*' do
-  filter :kramdown
-  layout 'default'
+# A few helpful tips about the Rules file:
+#
+# * The order of rules is important: for each item, only the first matching
+#   rule is applied.
+#
+# * Item identifiers start and end with a slash (e.g. “/about/” for the file
+#   “content/about.html”). To select all children, grandchildren, … of an
+#   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
+#   because “*” matches zero or more characters.
+
+
+# preprocessing, here we are setting up the category pages and the submenu for categorized pages
+
+preprocess do
+  Project.process_items @items
+end
+
+# compile rules
+
+compile '/assets/coffee/*/' do
+  filter :coffee
+end
+
+compile '/assets/sass/*/' do
+  filter :sass
+end
+
+compile '/' do
+  filter :haml
+  layout 'welcome'
+end
+
+compile '/karriere/' do
+end
+
+compile '/projekte/*/*_mehr' do
+  case item[:extension]
+    when 'md', 'txt'
+      filter :kramdown
+    else
+      filter :haml
+  end
+end
+
+compile '/*' do
+  case item[:extension]
+    when 'png', 'jpg', 'jpeg', 'cur', 'js'
+    when 'md', 'txt'
+      filter :kramdown
+      layout 'default'
+    else
+      filter :haml
+      layout 'default'
+  end
+end
+
+# routing rules
+
+# so that the /assets/coffee/ item is copied to /javascripts/ item
+route '/assets/coffee/*/' do
+  item.identifier.sub(%r{^/assets/coffee}, '/javascripts').chop + '.js'
+end
+
+route '/assets/sass/*/' do
+  item.identifier.sub(%r{^/assets/sass}, '/stylesheets').chop + '.css'
+end
+
+route '/karriere/' do
+  '/karriere.txt'
 end
 
 route '*' do
-  item.identifier + 'index.html'
+  case item[:extension]
+    when 'png', 'jpg', 'jpeg', 'cur', 'js'
+      item.identifier.chop + '.' + item[:extension]
+    else
+      item.identifier + 'index.html'
+  end
 end
+
+# layout rules
 
 layout '*', :haml
