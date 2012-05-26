@@ -32,7 +32,7 @@ class NanocController < ApplicationController
 
       render :text => 'uploaded result to s3'
     rescue Exception => e
-      render :text => "EXCEPTION: #{e}\n#{e.backtrace}\n#{`tree content`}", :content_type => Mime::TEXT
+      render :text => "EXCEPTION: #{e}\n#{e.backtrace}", :content_type => Mime::TEXT
     end
   end
 end
