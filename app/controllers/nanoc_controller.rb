@@ -3,7 +3,6 @@ require 's3_bucket'
 class NanocController < ApplicationController
   def compile
     site = Nanoc::Site.new({
-      :output_dir   => 'tmp/nanoc_output',
       :data_sources => [
         {
           :type         => 'filesystem_unified',
@@ -30,7 +29,7 @@ class NanocController < ApplicationController
       Rails.logger.warn site
       Rails.logger.warn site.config
 
-      'tmp/nanoc_output'.to_entry.copy_to output_bucket['']
+      'output'.to_entry.copy_to output_bucket['']
 
       render :text => 'uploaded result to s3'
     rescue Exception => e
