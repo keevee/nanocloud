@@ -46,7 +46,7 @@ end
 
 compile '/*' do
   case item[:extension]
-    when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'webm', 'html'
+    when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'mov', 'webm', 'html'
     when 'md', 'txt'
       filter :kramdown
       layout 'default'
@@ -73,7 +73,7 @@ end
 
 route '*' do
   case item[:extension]
-    when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'webm'
+    when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'mov', 'webm'
       item.identifier.chop + '.' + item[:extension]
     else
       item.identifier + 'index.html'
