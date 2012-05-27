@@ -1,0 +1,50 @@
+<h1>Projektingenieur (Versorgungstechnik, Energie- und Verfahrenstechnik)</h1>
+<h2>Diplom-Ingenieure / Techniker (FU, TU, TFH, TH) (Versorgungstechnik, Energie- und Verfahrenstechnik)</h2>
+<div>
+  Ihr Profil:
+  <ul>
+    <li>Ca. 3-5 Jahre Berufserfahrung in renommierten Planungsbüros,
+  sicheres Auftreten bei Kunden, selbstständige Arbeitsweise bei
+  überdurchschnittlicher Fachkompetenz, nachweisbare persönliche
+  Referenzen in mittleren und großen Projekten
+    <li>Kenntnis in HOAI, BGB, VOB, Projektmanagement, Betriebswirtschaft,
+  gute Kenntnisse in MS-Office, zzgl. Anwendungssoftware
+    <li>Zusatzqualifikationen z. B. BWL sind erwünscht aber nicht zwingend.
+    <li>Erwünscht ist die sichere Anwendung von AutoCAD.
+  </ul>
+
+  <p>
+  Wir bieten:
+  <ul>
+    <li> teamorientiertes Arbeiten
+    <li> überdurchschnittliche Bezahlung
+    <li> Eigenverantwortlichkeit
+    <li> individuelle Karriere-Konzepte
+  </ul>
+</div>
+
+<h1>Projektingenieur</h1>
+<h2>Techniker (FU, TU, TFH, TH) (Elektrotechnik mit dem Schwerpunkt: Technische Gebäudeausrüstung)</h2>
+<div>
+  <p>
+  Ihr Profil:
+  <ul>
+    <li> Ca. 3-5 Jahre Berufserfahrung in renommierten Planungsbüros, sicheres
+    Auftreten bei Kunden, selbstständige Arbeitsweise bei
+    überdurchschnittlicher Fachkompetenz, nachweisbare persönliche -
+    Referenzen in mittleren und großen Projekten
+    <li> Kenntnis in HOAI, BGB, VOB, Projektmanagement, Betriebswirtschaft,
+    gute Kenntnisse in MS-Office, zzgl. Anwendungssoftware
+    <li> Zusatzqualifikationen z. B. BWL sind erwünscht aber nicht zwingend.
+    <li> Erwünscht ist die sichere Anwendung von AutoCAD.
+  </ul>
+
+  <p>
+  Wir bieten:
+  <ul>
+    <li> teamorientiertes Arbeiten
+    <li> überdurchschnittliche Bezahlung
+    <li> Eigenverantwortlichkeit
+    <li> individuelle Karriere-Konzept
+  </ul>
+</div>

@@ -1,0 +1,16 @@
+!!! 5
+%html{ :lang => "en" }
+  %head
+    = render 'head'
+    %meta{ :'http-equiv' => 'refresh', :content => '4;url=/projekte/' }
+    %script{:src => "/javascripts/welcome.js"}
+
+  %body
+
+    %table#outer_container
+      %tr
+        %td
+          #start_container
+            %a{:href => '/projekte/'}
+              %img{:src => '/planb-logo.png', :style => 'margin-bottom: 50px'}
+              %img{:src => '/beratende-ingenieure.png'}
