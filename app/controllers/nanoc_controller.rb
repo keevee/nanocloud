@@ -6,6 +6,7 @@ class NanocController < ApplicationController
       :data_sources => [
         {
           :type         => 'filesystem_unified',
+          :encoding     => 'utf-8',
           :items_root   => '/',
           :layouts_root => '/',
           :config       => {} 
@@ -24,7 +25,7 @@ class NanocController < ApplicationController
       input_bucket['layouts'].copy_to Rails.root.to_s.to_entry['layouts']
 
       Rails.logger.warn ">>> Starting compilation ..."
-      # site.compile
+      site.compile
 
       Rails.logger.warn site
       Rails.logger.warn site.config
