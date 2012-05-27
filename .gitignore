@@ -17,6 +17,6 @@
 .rvmrc
 .sass-cache
 
-# content
-# layouts
+content
+layouts
 output
