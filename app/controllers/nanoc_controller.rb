@@ -21,12 +21,11 @@ class NanocController < ApplicationController
       output_bucket = S3Bucket.get site.config[:output_bucket]
 
       Rails.logger.warn ">>> Starting import of content ..."
-
       input_bucket['content'].copy_to Rails.root.to_s.to_entry['content']
       input_bucket['layouts'].copy_to Rails.root.to_s.to_entry['layouts']
 
       Rails.logger.warn ">>> Starting compilation ..."
-      site.compile
+      # site.compile
 
       Rails.logger.warn site
       Rails.logger.warn site.config
