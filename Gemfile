@@ -10,9 +10,11 @@ gem 'rails', '3.2.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'nanoc'
+# gem 'nanoc', :git => 'git@github.com:ddfreyne/nanoc.git'
+# gem 'nanoc', :git => 'git@github.com:ddfreyne/nanoc.git', :branch => 'release-3.3.x'
+# gem 'nanoc', :git => 'git@github.com:momolog/nanoc.git', :branch => 'debug'
 # gem 'nanoc', :path => '~/gem/nanoc'
-gem 'nanoc', :git => 'git@github.com:momolog/nanoc.git', :branch => 'debug'
-# gem 'nanoc'
 
 gem 'pg'
 

@@ -14,7 +14,7 @@ class Project
       throw "#{item.identifier} no category or name"                  unless item[:category] && item[:name]
       throw "#{item.identifier} unknown category #{item[:category]}"  unless (category = categories.find{|cat| cat[:key] == item[:category].to_sym})
       item[:cat_name] = category[:name]
-      item[:image]    = lambda {(img = item.children.detect{|i| i[:extension] == 'jpg'}) ? img.path : nil}
+      # item[:image]    = lambda {(img = item.children.detect{|i| i[:extension] == 'jpg'}) ? img.path : nil}
       @@projects << item
     end
 
