@@ -15,9 +15,11 @@ class NanocController < ApplicationController
 
       content_dir = Rails.root.to_s.to_entry['content']
       layouts_dir = Rails.root.to_s.to_entry['layouts']
+      output_dir  = Rails.root.to_s.to_entry['output']
 
       content_dir.destroy
       layouts_dir.destroy
+      output_dir.destroy
 
       Rails.logger.warn ">>> Starting import of content ..."
       input_bucket['content'].copy_to content_dir
@@ -27,7 +29,7 @@ class NanocController < ApplicationController
       site.compile
 
       Rails.logger.warn ">>> Starting upload of result ..."
-      'output'.to_entry.copy_to output_bucket['']
+      output_dir.copy_to output_bucket['']
 
       render :text => 'uploaded result to s3'
     rescue Exception => e
