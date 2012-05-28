@@ -64,7 +64,7 @@ route '*' do
     when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'mov', 'webm', 'css'
       item.identifier.chop + '.' + item[:extension]
     else
-      item.identifier + 'index.html'
+      item[:route] || item.identifier + 'index.html'
   end
 end
 
