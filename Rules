@@ -27,9 +27,6 @@ compile '/assets/sass/*/' do
   filter :sass
 end
 
-compile '/karriere/' do
-end
-
 compile '/projekte/*/*_mehr' do
   case item[:extension]
     when 'md', 'txt'
@@ -60,10 +57,6 @@ end
 
 route '/assets/sass/*/' do
   item.identifier.sub(%r{^/assets/sass}, '/stylesheets').chop + '.css'
-end
-
-route '/karriere/' do
-  '/karriere.txt'
 end
 
 route '*' do
