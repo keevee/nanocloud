@@ -27,11 +27,6 @@ compile '/assets/sass/*/' do
   filter :sass
 end
 
-compile '/' do
-  filter :haml
-  layout 'welcome'
-end
-
 compile '/karriere/' do
 end
 
@@ -49,10 +44,10 @@ compile '/*' do
     when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'mov', 'webm', 'html', 'css'
     when 'md', 'txt'
       filter :kramdown
-      layout 'default'
+      layout item[:layout] || 'default'
     else
       filter :haml
-      layout 'default'
+      layout item[:layout] ||'default'
   end
 end
 
