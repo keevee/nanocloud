@@ -2,8 +2,10 @@ Overview
 ========
 nanoccer is aimed to provide an application wrapper around the [nanoc](ddfreyne/nanoc) library.
 
-It should run on heroku and allow for in- and output to amazons S3 service.
+It runs on heroku and allows for in- and output to amazon S3 buckets.
 
-Prerequisites
+At the same time nanoccer aims to be a very general nanoc template.
+
+Configuration
 =============
-<code>ENV['AWS_ACCESS_KEY_ID']</code> and <code>ENV['AWS_SECRET_ACCESS_KEY']</code> must be set to valid values.
+All site configuration (Amazon credentials, in- and output bucket names) is stored in the Website model.

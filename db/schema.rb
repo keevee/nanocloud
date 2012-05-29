@@ -11,17 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120528082225) do
+ActiveRecord::Schema.define(:version => 20120529120733) do
 
   create_table "websites", :force => true do |t|
-    t.string   "name"
-    t.string   "input_bucket"
-    t.string   "output_bucket"
-    t.string   "preview_bucket"
-    t.string   "aws_key"
-    t.string   "aws_secret"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.string "name"
+    t.string "input_bucket"
+    t.string "output_bucket"
+    t.string "preview_bucket"
+    t.string "aws_key"
+    t.string "aws_secret"
   end
 
 end
