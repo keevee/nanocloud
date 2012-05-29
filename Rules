@@ -1,4 +1,8 @@
 #!/usr/bin/env ruby
+#
+# FIXME: 
+# - use config[:text_entensions] instead of explicit enumeration of binaries
+#
 
 # A few helpful tips about the Rules file:
 #
@@ -38,7 +42,8 @@ end
 
 compile '/*' do
   case item[:extension]
-    when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'mov', 'webm', 'html', 'css'
+    when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'mov', 'webm', 'css'
+    when 'html'
     when 'md', 'txt'
       filter :kramdown
       layout item[:layout] || 'default'
