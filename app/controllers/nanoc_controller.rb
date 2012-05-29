@@ -2,38 +2,38 @@ require 's3_bucket'
 
 class NanocController < ApplicationController
   def compile
-    unless (input = params[:input]) && (output = params[:output])
-      render :text => "you must specify input and output"
+    unless (website_name = params[:website]) && (website = Website.find_by_name(website_name))
+      render :text => "you must specify a valid website"
       return false
     end
 
     site = Nanoc::Site.new({})
 
     begin
-      input_bucket  = S3Bucket.get input
-      output_bucket = S3Bucket.get output
+      input_bucket  = S3Bucket.get website.input_bucket,  website.aws_key, website.aws_secret
+      output_bucket = S3Bucket.get website.output_bucket, website.aws_key, website.aws_secret
 
-      content_dir = Rails.root.to_s.to_entry['content']
-      layouts_dir = Rails.root.to_s.to_entry['layouts']
-      output_dir  = Rails.root.to_s.to_entry['output']
+      local = Rails.root.to_s.to_entry
 
-      content_dir.destroy
-      layouts_dir.destroy
-      output_dir.destroy
+      local['content'].destroy
+      local['layouts'].destroy
+      local['output'].destroy
 
       Rails.logger.warn ">>> Starting import of content ..."
-      input_bucket['content'].copy_to content_dir
-      input_bucket['layouts'].copy_to layouts_dir
+      input_bucket['content'].copy_to local['content']
+      input_bucket['layouts'].copy_to local['layouts']
 
       Rails.logger.warn ">>> Starting compilation ..."
       site.compile
 
       Rails.logger.warn ">>> Starting upload of result ..."
-      output_dir.copy_to output_bucket['']
+      local['output'].copy_to output_bucket['']
 
-      render :text => 'uploaded result to s3'
+      render :text => 'Success! Uploaded result to s3.'
+    rescue SocketError => e
+      render :text => "Error: Could not connect to buckets.", :content_type => Mime::TEXT
     rescue Exception => e
-      render :text => "EXCEPTION: #{e}\n#{e.backtrace}", :content_type => Mime::TEXT
+      render :text => "Error: #{e.class} #{e}\n#{e.backtrace}", :content_type => Mime::TEXT
     end
   end
 end
