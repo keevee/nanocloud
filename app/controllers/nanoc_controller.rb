@@ -30,7 +30,7 @@ class NanocController < ApplicationController
       local['output'].copy_to output_bucket['']
 
       render :text => 'Success! Uploaded result to s3.'
-    rescue SocketError => e
+    rescue SocketError, AWS::Errors::Base  => e
       render :text => "Error: Could not connect to buckets.", :content_type => Mime::TEXT
     rescue Exception => e
       render :text => "Error: #{e.class} #{e}\n#{e.backtrace}", :content_type => Mime::TEXT
