@@ -8,4 +8,4 @@ At the same time nanoccer aims to be a very general nanoc template.
 
 Configuration
 =============
-All site configuration (Amazon credentials, in- and output bucket names) is stored in the Website model.
+All site configurations (Amazon credentials, in- and output bucket names) are stored in the Website model.
