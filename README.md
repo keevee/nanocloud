@@ -1,10 +1,10 @@
 Overview
 ========
-nanoccer is aimed to provide an application wrapper around the [nanoc](ddfreyne/nanoc) library.
+nanocloud is aimed to provide an application wrapper around the [nanoc](ddfreyne/nanoc) library.
 
 It runs on heroku and allows for in- and output to amazon S3 buckets.
 
-At the same time nanoccer aims to be a very general nanoc template.
+At the same time nanocloud aims to be a very general nanoc template.
 
 Configuration
 =============

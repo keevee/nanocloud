@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Nanoccer::Application.load_tasks
+Nanocloud::Application.load_tasks

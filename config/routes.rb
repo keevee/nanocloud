@@ -1,4 +1,4 @@
-Nanoccer::Application.routes.draw do
+Nanocloud::Application.routes.draw do
 
   match 'compile' => 'nanoc#compile'
 
