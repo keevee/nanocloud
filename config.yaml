@@ -1,1 +1,2 @@
 enable_output_diff: true
+text_extensions: [ 'css', 'erb', 'haml', 'htm', 'html', 'js', 'less', 'markdown', 'md', 'php', 'rb', 'sass', 'scss', 'txt', 'xhtml', 'xml', 'coffee' ]
