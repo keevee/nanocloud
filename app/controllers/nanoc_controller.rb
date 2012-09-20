@@ -1,9 +1,11 @@
 require 's3_bucket'
 
 class NanocController < ApplicationController
+
   def compile
     unless (website_name = params[:website]) && (website = Website.find_by_name(website_name))
-      render :text => "you must specify a valid website"
+      @message = "you must specify a valid website"
+      render
       return false
     end
 
@@ -29,11 +31,12 @@ class NanocController < ApplicationController
       Rails.logger.warn ">>> Starting upload of result ..."
       local['output'].copy_to output_bucket['']
 
-      render :text => 'Success! Uploaded result to s3.'
+      @message =  'Success! Uploaded result to s3.'
     rescue SocketError, AWS::Errors::Base  => e
-      render :text => "Error: Could not connect to buckets.", :content_type => Mime::TEXT
+      @message = "Error: Could not connect to buckets."
     rescue Exception => e
-      render :text => "Error: #{e.class} #{e}\n#{e.backtrace}", :content_type => Mime::TEXT
+      @message = "Error: #{e.class} #{e}\n#{e.backtrace}"
     end
+    render
   end
 end

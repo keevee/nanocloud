@@ -25,7 +25,7 @@ end
 
 gem 'rspec-rails'
 
-gem 'haml'
+gem 'slim'
 gem 'aws-sdk'
 gem 'vos'
 gem 'vfs', :git => 'git@github.com:momolog/vfs.git'
@@ -50,6 +50,7 @@ gem 'mime-types'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'bootstrap-sass', '~> 2.1.0.0'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platform => :ruby
