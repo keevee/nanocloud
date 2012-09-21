@@ -24,9 +24,14 @@ body#devise-passwords
     display: none
 
 
-#logo_link:hover
-  text-decoration: none
-  font-style: italic
+#logo_link
+  ::selection
+    background-color: black
+    color: $yellow
+  &:hover
+    text-decoration: none
+    font-style: italic
+
 
 #asciart-logo
   font-size: 10px
@@ -36,4 +41,4 @@ body#devise-passwords
   width: 400px
   margin: auto
   margin-bottom: $spc
-
+  padding: 0
