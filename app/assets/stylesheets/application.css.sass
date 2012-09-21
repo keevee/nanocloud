@@ -3,15 +3,30 @@
 @import "bootstrap"
 
 
+$spc: 10px
+$spc2: 25px
+$spc3: 70px
+
 body
   width: 800px
   margin: auto
-  margin-top: 150px
+  margin-top: $spc2
+
   font-family: Lato, "Helvetica Neue Light", arial
 
 #user_nav
-  float: right
+  text-align: right
 
+body#devise-sessions,
+body#devise-registrations,
+body#devise-passwords
+  #user_nav
+    display: none
+
+
+#logo_link:hover
+  text-decoration: none
+  font-style: italic
 
 #asciart-logo
   font-size: 10px
@@ -20,3 +35,5 @@ body
   border: none
   width: 400px
   margin: auto
+  margin-bottom: $spc
+
