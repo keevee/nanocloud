@@ -1,6 +1,8 @@
-h1 hallo, you are at nano cloud
-div have fun!
-
-hr
+#user_nav
+  - if user_signed_in?
+    | Signed in as #{current_user.email}. Not you?
+    = link_to "Sign out", destroy_user_session_path, :method => :delete
+  - else
+    = link_to "sign in", new_user_session_path, :class=>'btn btn-primary'
 
 = @message
