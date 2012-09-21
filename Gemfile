@@ -76,3 +76,4 @@ gem 'jquery-rails'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem "devise", "~> 2.1.2"
+gem "activeadmin", "~> 0.5.0"
