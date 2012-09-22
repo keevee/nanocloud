@@ -17,8 +17,8 @@
 .rvmrc
 .sass-cache
 
-content
-layouts
-output
+#content
+#layouts
+#output
 
 .idea
