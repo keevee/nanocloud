@@ -1,11 +1,9 @@
 ---
-- key: hotels
-  name: HOTEL
-- key: bueros
-  name: BÜRO
-- key: gewerbe
-  name: GEWERBE
-- key: oeffentlich
-  name: ÖFFENTLICH
-- key: wohnen
-  name: WOHNEN
+- key: grafik
+  name: Grafik
+- key: buch
+  name: Bücher
+- key: illustration
+  name: Illustration
+- key: web
+  name: Web
