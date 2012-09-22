@@ -1,10 +1,16 @@
 require 's3_bucket'
 
 class NanocController < ApplicationController
+  before_filter :authenticate_user!
 
-  def compile
-    unless (website_name = params[:website]) && (website = Website.find_by_name(website_name))
-      @message = "you must specify a valid website"
+  def index
+    if params[:todo].blank?
+      render
+      return
+    end
+    website = current_user.website
+    unless website
+      @message = "You are not connected to a website yet. please ask us to make you connected"
       render
       return false
     end
