@@ -6,24 +6,25 @@ html
     = csrf_meta_tags
 
   body id=params[:controller].downcase.gsub('/','-') class=params[:action].downcase
-    a href=root_url id='logo_link'
-      pre#asciart-logo
-        |  ____    ____  ____    ___     __  _       ___   __ __  ___
-          |    \  /    ||    \  /   \   /  ]| |     /   \ |  |  ||   \
-          |  _  ||  o  ||  _  ||     | /  / | |    |     ||  |  ||    \
-          |  |  ||     ||  |  ||  O  |/  /  | |___ |  O  ||  |  ||  D  |
-          |  |  ||  _  ||  |  ||     /   \_ |     ||     ||  :  ||     |
-          |  |  ||  |  ||  |  ||     \     ||     ||     ||     ||     |
-          |__|__||__|__||__|__| \___/ \____||_____| \___/  \__,_||_____|
+    #header
+      a href=root_url id='logo_link'
+        pre#asciart-logo
+          |  ____    ____  ____    ___     __  _       ___   __ __  ___
+            |    \  /    ||    \  /   \   /  ]| |     /   \ |  |  ||   \
+            |  _  ||  o  ||  _  ||     | /  / | |    |     ||  |  ||    \
+            |  |  ||     ||  |  ||  O  |/  /  | |___ |  O  ||  |  ||  D  |
+            |  |  ||  _  ||  |  ||     /   \_ |     ||     ||  :  ||     |
+            |  |  ||  |  ||  |  ||     \     ||     ||     ||     ||     |
+            |__|__||__|__||__|__| \___/ \____||_____| \___/  \__,_||_____|
 
-    #user_nav
-      - if user_signed_in?
-        | Signed in as #{current_user.email}.
-        br
-        | Not you?
-        = link_to " Sign out", destroy_user_session_path, :method => :delete
+      #user_nav
+        - if user_signed_in?
+          | Signed in as #{current_user.email}.
+          br
+          | Not you?
+          = link_to " Sign out", destroy_user_session_path, :method => :delete
 
-    = yield
+    #main= yield
 
     = javascript_include_tag "application"
 

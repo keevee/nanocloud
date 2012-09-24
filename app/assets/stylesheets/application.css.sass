@@ -16,6 +16,7 @@ body
 
 #user_nav
   text-align: right
+  float: right
 
 body#devise-sessions,
 body#devise-registrations,
@@ -25,6 +26,7 @@ body#devise-passwords
 
 
 #logo_link
+  float:left
   ::selection
     color: $blueDark
   &:hover
@@ -37,11 +39,14 @@ body#devise-passwords
   line-height: 10px
   background-color: white
   border: none
-  width: 500px
+  float: left
   margin: auto
   margin-bottom: $spc
   padding: 0
 
+#main
+  clear: both
+  padding-top: 100px
 body#welcome.index
   #logo_link, #user_nav
     display: none
