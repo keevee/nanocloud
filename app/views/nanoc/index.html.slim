@@ -1,5 +1,14 @@
 div= @message
-= form_tag '', :method=>:post do
-  input type='hidden' name='todo' value='compile'
-  input type='submit' class='btn btn-large btn-danger' value='COMPILE'
+- if website = current_user.website
+  = form_tag '', :method=>:post do
+    input type='hidden' name='todo' value='compile'
+    input type='submit' class='btn btn-large btn-danger' value='COMPILE'
+  p.lead your website is: #{website.name}
+  dl.dl-horizontal
+    dt preview bucket
+    dd = website.preview_bucket
+    dt output bucket
+    dd = website.output_bucket
 
+- else
+  p.lead You don't have any websites yet.  :(
