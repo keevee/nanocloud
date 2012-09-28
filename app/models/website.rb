@@ -40,13 +40,12 @@ class Website < ActiveRecord::Base
     rescue SocketError, AWS::Errors::Base => e
       message = "Error: Could not connect to buckets."
     rescue CompilationException => e
-      Rails.logger.warn ">>> Nanoc Compilation Exception >>> "
       Rails.logger.warn e.class
       Rails.logger.warn e
       Rails.logger.warn e.backtrace
-      message = "Error: #{e.class} #{e}\n#{e.backtrace}"
+      message = "Error: #{e.class} #{e}\n"
     rescue Exception => e
-      message = "Error: #{e.class} #{e}\n#{e.backtrace}"
+      message = "Error: #{e.class} #{e}\n"
     end
     message
   end
