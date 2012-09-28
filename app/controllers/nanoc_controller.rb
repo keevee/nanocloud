@@ -4,19 +4,20 @@ class NanocController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    if params[:todo].blank?
-      render
-      return
+    unless @website = current_user.website
+      @message = "You are not connected to a website yet. Please <a href='mailto:post@momolog.info'>contact us</a> to set up your account.".html_safe
     end
-    website = current_user.website
-    unless website
-      @message = "You are not connected to a website yet. please ask us to make you connected"
-      render
-      return false
+  end
+
+  def compile
+    if @website = current_user.website
+      flash[:info] = @website.compile
+    else
+      flash[:info] = "You are not connected to a website yet. Please <a href='mailto:post@momolog.info'>contact us</a> to set up your account.".html_safe
     end
 
-    @message = website.compile
-    render
+    Rails.logger.warn "REDIRECT TO DASHBOARD"
+    redirect_to '/dashboard/'
   end
 
 end
