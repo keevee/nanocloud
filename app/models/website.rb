@@ -25,6 +25,8 @@ class Website < ActiveRecord::Base
       Rails.logger.warn ">>> Starting upload of result ..."
       local['output'].copy_to output_bucket['']
 
+      update_attribute :compiled_at, Time.now
+
       message = 'Success! Uploaded result to s3.'
     rescue SocketError, AWS::Errors::Base => e
       message = "Error: Could not connect to buckets."
