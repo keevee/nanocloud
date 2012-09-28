@@ -1,7 +1,12 @@
-p= @message
+div= @message
 - if @website
-  = form_tag '', :method=>:post do
+  = form_tag compile_url, :method=>:post do
     input type='hidden' name='todo' value='compile'
-    input type='submit' class='btn btn-large btn-danger' style='margin-right: 10px' value='COMPILE'
-    = @website.name
-
+    input type='submit' class='btn btn-large btn-danger' value="Publish Site '#{@website.name}'"
+  dl.dl-horizontal
+    dt preview bucket
+    dd = @website.preview_bucket_name
+    dt output bucket
+    dd = @website.output_bucket_name
+- else
+  p.lead You don't have any websites yet.  :(

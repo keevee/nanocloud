@@ -22,3 +22,6 @@
 /layouts
 /output
 /.idea
+
+/lib/helpers.rb
+/lib/filters.rb
