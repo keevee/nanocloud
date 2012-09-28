@@ -14,15 +14,11 @@
 /log/*.log
 /tmp
 
-.rvmrc
-.powrc
-.sass-cache
+/.rvmrc
+/.powrc
+/.sass-cache
 
-#content
-#layouts
-#output
-.idea
-
-content_planb
-layouts_planb
-categories_planb.yaml
+/content
+/layouts
+/output
+/.idea
