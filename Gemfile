@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
-ruby '1.9.3'
+ruby '1.9.2'
 
 if RUBY_VERSION =~ /1.9/
   Encoding.default_external = Encoding::UTF_8
   Encoding.default_internal = Encoding::UTF_8
 end
 
-gem 'rails', '3.2.3'
+gem 'rails', '~> 3.2.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -76,5 +76,5 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-gem "devise", "~> 2.1.2"
+gem "devise", "~> 2.2"
 gem "activeadmin", "~> 0.5.0"
