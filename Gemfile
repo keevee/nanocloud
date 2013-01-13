@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '1.9.2'
+ruby '1.9.3'
 
 if RUBY_VERSION =~ /1.9/
   Encoding.default_external = Encoding::UTF_8
@@ -11,7 +11,8 @@ gem 'rails', '~> 3.2.0'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'nanoc'
+# gem 'nanoc'
+gem 'nanoc', :git => 'git://github.com/momolog/nanoc.git'
 # gem 'nanoc', :git => 'git@github.com:ddfreyne/nanoc.git'
 # gem 'nanoc', :git => 'git@github.com:ddfreyne/nanoc.git', :branch => 'release-3.3.x'
 # gem 'nanoc', :git => 'git@github.com:momolog/nanoc.git', :branch => 'debug'
@@ -27,8 +28,8 @@ gem 'rspec-rails'
 
 gem 'slim'
 gem 'aws-sdk'
-gem 'vos'
-gem 'vfs', :git => 'git@github.com:momolog/vfs.git'
+gem 'vfs', :git => 'git://github.com/momolog/vfs.git'
+gem 'vos', :git => 'git://github.com/momolog/vos.git'
 
 # filters etc
 gem 'maruku'

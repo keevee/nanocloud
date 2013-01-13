@@ -9,7 +9,8 @@ module S3Bucket
       driver = Vos::Drivers::S3.new \
         access_key_id:     aws_key,
         secret_access_key: aws_secret,
-        bucket:            bucket_name
+        bucket:            bucket_name,
+        write_options:     {:cache_control => 'public,max-age=31536000'}
 
       @@buckets[bucket_name] = Vos::Box.new driver
     end

@@ -14,7 +14,7 @@ class NanocController < ApplicationController
 
   def compile
     if @website = current_user.website
-      flash[:info] = @website.compile
+      flash[:info] = @website.compile(params[:preview]!='false')
     else
       flash[:info] = "You are not connected to a website yet. Please <a href='mailto:post@momolog.info'>contact us</a> to set up your account.".html_safe
     end
