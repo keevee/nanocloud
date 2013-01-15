@@ -36,15 +36,16 @@ class Website < ActiveRecord::Base
         end
       end
 
-      nanoc = Nanoc::Site.new('.')
+      # nanoc = Nanoc::Site.new('.')
       # nanoc = Nanoc::Site.new({})
 
-      Rails.logger.info "##########"
-      Rails.logger.info nanoc.config
-      Rails.logger.info "##########"
+      # Rails.logger.info "##########"
+      # Rails.logger.info nanoc.config
+      # Rails.logger.info "##########"
 
       begin
-        nanoc.compile
+        # nanoc.compile
+        `nanoc co`
       rescue Exception => e
         Rails.logger.error ">>> nanoc compilation exception:"
         Rails.logger.error e.class
