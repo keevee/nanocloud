@@ -1,12 +1,27 @@
 div= @message
-- if @website
-  = form_tag compile_url, :method=>:post do
-    input type='hidden' name='todo' value='compile'
-    input type='submit' class='btn btn-large btn-danger' value="Publish Site '#{@website.name}'"
-  dl.dl-horizontal
-    dt preview bucket
-    dd = @website.preview_bucket_name
-    dt output bucket
-    dd = @website.output_bucket_name
-- else
-  p.lead You don't have any websites yet.  :(
+
+.hero-unit
+  - if @websites.present?
+    table.table
+      tr
+        td Name
+        td Preview
+        td
+        td Live
+        td
+      - @websites.each do |website|
+        tr
+          td
+            = website.name
+          td
+            a href="http://#{website.preview_bucket_name}" 
+              = website.preview_bucket_name
+          td
+            a.btn href='/compile?name=#{website.name}&preview=true' Update Preview
+          td
+            a href="http://#{website.output_bucket_name}" 
+              = website.output_bucket_name
+          td
+            a.btn.btn-danger href='/compile?name=#{website.name}' Update Live
+  - else
+    p.lead You don't have any websites yet.  :(

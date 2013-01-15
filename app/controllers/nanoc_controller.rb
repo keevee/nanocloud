@@ -7,13 +7,11 @@ class NanocController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    unless @website = current_user.website
-      @message = "You are not connected to a website yet. Please <a href='mailto:post@momolog.info'>contact us</a> to set up your account.".html_safe
-    end
+    @websites = current_user.websites
   end
 
   def compile
-    if @website = current_user.website
+    if current_user.websites.include(@website)
       flash[:info] = @website.compile(params[:preview]!='false')
     else
       flash[:info] = "You are not connected to a website yet. Please <a href='mailto:post@momolog.info'>contact us</a> to set up your account.".html_safe
