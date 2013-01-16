@@ -3,3 +3,5 @@
 
 en:
   hello: "Hello world"
+  signed_in_as: Signed in as %{name}.
+  log_out: Log out.

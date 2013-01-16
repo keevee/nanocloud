@@ -1,0 +1,5 @@
+de:
+  signed_in_as: Eingeloggt als %{name}.
+  log_out: Ausloggen.
+  build_preview: Preview bauen
+  build_live: Seite bauen

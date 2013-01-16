@@ -1,15 +1,24 @@
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal'}) do |f|
   legend Sign in
-  = f.label :email
-  = f.email_field :email
-  = f.label :password
-  = f.password_field :password
+  .control-group
+    = f.label :email, :class => 'control-label'
+    .controls
+      = f.email_field :email
+  .control-group
+    = f.label :password, :class => 'control-label'
+    .controls
+      = f.password_field :password
 
   - if devise_mapping.rememberable?
-    = f.label :remember_me do
-      = f.check_box :remember_me
-      | &nbsp;remember me
+    .control-group
+      .controls
+        = f.check_box :remember_me
+        | &nbsp;remember me
 
-  div= f.submit "Sign in", :class => 'btn btn-primary'
-
-= render "devise/shared/links"
+  .control-group
+    .controls
+      = f.submit "Sign in", :class => 'btn btn-primary'
+      | &nbsp;
+      | &nbsp;
+      | &nbsp;
+      = render "devise/shared/links"

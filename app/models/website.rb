@@ -5,6 +5,8 @@ class Website < ActiveRecord::Base
   attr_accessible :input_bucket_name, :name, :output_bucket_name, :preview_bucket_name, :user_id
   belongs_to :user
 
+  default_scope order('name ASC')
+
   def compile(preview = true)
     begin
       Rails.logger.warn "#{user.aws_key} #{user.aws_secret}"
