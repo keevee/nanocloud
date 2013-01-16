@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115211647) do
+ActiveRecord::Schema.define(:version => 20130116070825) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(:version => 20130115211647) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "aws_key"
+    t.string   "aws_secret"
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -59,6 +61,8 @@ ActiveRecord::Schema.define(:version => 20130115211647) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "aws_key"
+    t.string   "aws_secret"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
@@ -69,8 +73,6 @@ ActiveRecord::Schema.define(:version => 20130115211647) do
     t.string   "input_bucket_name"
     t.string   "output_bucket_name"
     t.string   "preview_bucket_name"
-    t.string   "aws_key"
-    t.string   "aws_secret"
     t.datetime "compiled_at"
     t.integer  "user_id"
   end

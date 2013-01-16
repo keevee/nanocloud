@@ -9,6 +9,8 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs "Admin Details" do
       f.input :email
+      f.input :aws_key
+      f.input :aws_secret
     end
     f.buttons
   end

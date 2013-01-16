@@ -2,20 +2,22 @@ class NanocCompilationException < Exception
 end
 
 class Website < ActiveRecord::Base
-  attr_accessible :aws_key, :aws_secret, :input_bucket_name, :name, :output_bucket_name, :preview_bucket_name, :user_id
+  attr_accessible :input_bucket_name, :name, :output_bucket_name, :preview_bucket_name, :user_id
   belongs_to :user
 
   def compile(preview = true)
     begin
+      Rails.logger.warn "#{user.aws_key} #{user.aws_secret}"
+
       Rails.logger.info ">>> connecting to input bucket '#{input_bucket_name}' ..."
-      input_bucket  = S3Bucket.get input_bucket_name,  aws_key, aws_secret
+      input_bucket  = S3Bucket.get input_bucket_name,  user.aws_key, user.aws_secret
 
       if preview
         Rails.logger.info ">>> connecting to preview bucket '#{preview_bucket_name}' ..."
-        output_bucket  = S3Bucket.get preview_bucket_name,  aws_key, aws_secret
+        output_bucket  = S3Bucket.get preview_bucket_name,  user.aws_key, user.aws_secret
       else
         Rails.logger.info ">>> connecting to output bucket '#{output_bucket_name}' ..."
-        output_bucket = S3Bucket.get output_bucket_name, aws_key, aws_secret
+        output_bucket = S3Bucket.get output_bucket_name, user.aws_key, user.aws_secret
       end
 
       local = Rails.root.to_s.to_entry
@@ -36,12 +38,7 @@ class Website < ActiveRecord::Base
         end
       end
 
-      # nanoc = Nanoc::Site.new('.')
-      # nanoc = Nanoc::Site.new({})
-
-      # Rails.logger.info "##########"
-      # Rails.logger.info nanoc.config
-      # Rails.logger.info "##########"
+      Rails.logger.info "##########"
 
       begin
         # nanoc.compile
@@ -62,13 +59,14 @@ class Website < ActiveRecord::Base
 
       message = 'Success! Uploaded result to S3.'
     rescue SocketError, AWS::Errors::Base => e
-      message = "Error: Could not connect to buckets."
+      message = "Socket Error: Could not connect to buckets."
       Rails.logger.error e
       Rails.logger.error e.backtrace
     rescue NanocCompilationException => e
-      message = "Error: #{e.class} #{e}\n"
+      message = "Compilation Error: #{e.class} #{e}\n"
     rescue Exception => e
-      message = "Error: #{e.class} #{e}\n"
+      message = "Unknown Error: #{e.class} #{e}\n"
+      Rails.logger.error e.backtrace
     end
     message
   end

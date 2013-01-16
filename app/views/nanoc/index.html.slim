@@ -17,11 +17,12 @@ div= @message
             a href="http://#{website.preview_bucket_name}" 
               = website.preview_bucket_name
           td
-            a.btn href='/compile?name=#{website.name}&preview=true' Update Preview
+            a.btn href='/compile?name=#{website.name}&preview=true' target='output' Update Preview
           td
             a href="http://#{website.output_bucket_name}" 
               = website.output_bucket_name
           td
-            a.btn.btn-danger href='/compile?name=#{website.name}' Update Live
+            a.btn.btn-danger href='/compile?name=#{website.name}' target='output' Update Live
+    iframe#output
   - else
     p.lead You don't have any websites yet.  :(

@@ -11,14 +11,16 @@ class NanocController < ApplicationController
   end
 
   def compile
-    if current_user.websites.include(@website)
-      flash[:info] = @website.compile(params[:preview]!='false')
+    if @website = Website.find_by_name(params[:name])
+      if current_user.websites.include?(@website)
+        @output = @website.compile(params[:preview]!='false')
+      else
+        @output = "You are not connected to a website yet. Please <a href='mailto:post@momolog.info'>contact us</a> to set up your account.".html_safe
+      end
     else
-      flash[:info] = "You are not connected to a website yet. Please <a href='mailto:post@momolog.info'>contact us</a> to set up your account.".html_safe
     end
 
-    Rails.logger.warn "REDIRECT TO DASHBOARD"
-    redirect_to '/dashboard/'
+    render 'output', :layout => false
   end
 
 end
