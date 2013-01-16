@@ -22,14 +22,14 @@ class Website < ActiveRecord::Base
 
       local = Rails.root.to_s.to_entry
 
-      # local['content'].destroy
-      # local['layouts'].destroy
+      local['content'].destroy
+      local['layouts'].destroy
       local['output'].destroy
 
       Rails.logger.info ">>> importing content ..."
-      # input_bucket['content'].copy_to                 local['content']
+      input_bucket['content'].copy_to                 local['content']
       Rails.logger.info ">>> importing layouts ..."
-      # input_bucket['layouts'].copy_to                 local['layouts']
+      input_bucket['layouts'].copy_to                 local['layouts']
 
       ['lib/helpers.rb', 'lib/filters.rb', 'Rules_preprocess_local', 'config.yaml'].each do |file|
         if input_bucket[file].exist?
