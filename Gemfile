@@ -8,8 +8,7 @@ end
 
 gem 'rails', '~> 3.2.0'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'delayed_job_active_record'
 
 # gem 'nanoc'
 gem 'nanoc', :git => 'git://github.com/momolog/nanoc.git'
@@ -49,6 +48,10 @@ gem 'mime-types'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+end
+
+group :production do
+  gem 'heroku-api'
 end
 
 gem 'bootstrap-sass', '~> 2.1.0.0'

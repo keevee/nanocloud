@@ -1,3 +1,5 @@
+require 's3_bucket'
+
 class NanocCompilationException < Exception
 end
 
@@ -68,6 +70,7 @@ class Website < ActiveRecord::Base
       message = "Compilation Error: #{e.class} #{e}\n"
     rescue Exception => e
       message = "Unknown Error: #{e.class} #{e}\n"
+      Rails.logger.error "#{e}"
       Rails.logger.error e.backtrace
     end
     message
