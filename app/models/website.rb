@@ -1,5 +1,6 @@
 require 's3_bucket'
 require 'managed_job'
+require 'heroku_manager'
 
 class NanocCompilationException < Exception
 end
