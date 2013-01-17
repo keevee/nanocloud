@@ -4,8 +4,12 @@ nanocloud is aimed to provide an application wrapper around the [nanoc](ddfreyne
 
 It runs on heroku and allows for in- and output to amazon S3 buckets.
 
-At the same time nanocloud aims to be a very general nanoc template.
-
 Configuration
 =============
-All site configurations (Amazon credentials, in- and output bucket names) are stored in the Website model.
+All site configurations (in- and output bucket names) are stored in the Website model.
+
+Amazon credentials are stored inside the user model.
+
+ENV[HEROKU_API_KEY] has to be set, so that the heroku-api gem can start
+and stop workers when needed.
+
