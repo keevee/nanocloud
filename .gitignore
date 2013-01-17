@@ -22,3 +22,6 @@
 /layouts
 /output
 /.idea
+
+/Rules_preprocess_local
+/config.yaml
