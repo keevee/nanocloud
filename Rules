@@ -14,20 +14,21 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
-
 # preprocessing, here we are setting up the category pages and the submenu for categorized pages
 
 preprocess do
-  Project.process_items @items
+  eval File.read('Rules_preprocess_local') if File.exist? 'Rules_preprocess_local'
 end
 
 # compile rules
 
 compile '/assets/coffee/*/' do
+  filter :erb
   filter :coffee
 end
 
 compile '/assets/sass/*/' do
+  filter :erb
   filter :sass
 end
 
@@ -36,6 +37,17 @@ compile '/projekte/*/*_mehr' do
     when 'md', 'txt'
       filter :kramdown
     else
+      filter :haml
+  end
+end
+
+compile '/*', :rep => :nolayout do
+  case item[:extension]
+    when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'mov', 'webm', 'css'
+    when 'html'
+    when 'md', 'txt'
+      filter :kramdown
+    when 'haml'
       filter :haml
   end
 end
@@ -62,6 +74,13 @@ end
 
 route '/assets/sass/*/' do
   item.identifier.sub(%r{^/assets/sass}, '/stylesheets').chop + '.css'
+end
+
+route '*', :rep => :nolayout do
+  case item[:extension]
+    when 'haml', 'txt'
+      item.identifier + 'index.txt'
+  end
 end
 
 route '*' do
