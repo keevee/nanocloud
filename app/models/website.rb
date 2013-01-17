@@ -1,6 +1,21 @@
 require 's3_bucket'
+require 'managed_job'
 
 class NanocCompilationException < Exception
+end
+
+class CompilerJob < ManagedJob
+  attr_accessor :website_id, :preview
+
+  def initialize(website_id, preview=true)
+    self.website_id = website_id
+    self.preview    = preview
+    super()
+  end
+
+  def perform
+    Website.find(website_id).compile(preview)
+  end
 end
 
 class Website < ActiveRecord::Base
