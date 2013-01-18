@@ -4,10 +4,22 @@ class Project
 
   class << self
 
-    def load items, categories
+    def process_items(items, categories)
       @@projects    = []
       @@categories  = categories
-      @@cat_keys    = @@categories.keys
+      @@cat_keys    = @@categories.map{|c| c[:key].to_sym}
+
+      # add items with category to projects list
+      items.each do |it|
+        add(it) if (cat_key = it[:category]) && (@@cat_keys.include? cat_key.to_sym)
+      end
+
+      # add category lists
+      items.each do |it|
+        if cat_key = it[:category]
+          it[:project_list] = by_category(cat_key)
+        end
+      end
     end
 
     def add (item)
@@ -35,27 +47,12 @@ class Project
     end
 
     def categories
-      @@categories.map do |key, cat|
+      @@categories.map do |cat|
+        key = cat[:key].to_sym
         cat.merge({
           :key  => key,
           :path => (f = by_category(key).first) && begin f.path rescue nil end
         })
-      end
-    end
-
-    def process_items(items, categories)
-      load items, categories
-
-      # add items with category to projects list
-      items.each do |it|
-        add(it) if (cat_key = it[:category]) && (@@cat_keys.include? cat_key.to_sym)
-      end
-
-      # add category lists
-      items.each do |it|
-        if cat_key = it[:category]
-          it[:project_list] = by_category(cat_key)
-        end
       end
     end
 
