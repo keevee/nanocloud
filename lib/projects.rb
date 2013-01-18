@@ -7,7 +7,7 @@ class Project
     def process_items(items, categories)
       @@projects    = []
       @@categories  = categories
-      @@cat_keys    = @@categories.map{|c| c[:key].to_sym}
+      @@cat_keys    = @@categories.map{|c| c[:key]}
 
       # add items with category to projects list
       items.each do |it|
