@@ -7,6 +7,7 @@ Nanocloud::Application.routes.draw do
 
   match 'compile'   => 'nanoc#compile', :as => :compile
   match 'dashboard' => 'nanoc#index'
+  match 'jobs/:id/check' => 'jobs#check'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
