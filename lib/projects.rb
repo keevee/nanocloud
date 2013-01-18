@@ -4,17 +4,17 @@ class Project
 
   class << self
 
-    def load items
+    def load items, categories
       @@projects    = []
-      @@categories  = YAML.load(File.new('categories.yaml')).recursively_symbolize_keys!
-      @@cat_keys    = @@categories.map{|c| c[:key].to_sym}
+      @@categories  = categories
+      @@cat_keys    = @@categories.keys
     end
 
     def add (item)
       throw "#{item.identifier} no category or name"                  unless item[:category] && item[:name]
       throw "#{item.identifier} unknown category #{item[:category]}"  unless (category = categories.find{|cat| cat[:key] == item[:category].to_sym})
       item[:cat_name] = category[:name]
-      # item[:image]    = lambda {(img = item.children.detect{|i| i[:extension] == 'jpg'}) ? img.path : nil}
+      item[:image]    = lambda {(img = item.children.detect{|i| i[:extension] == 'jpg'}) ? img.path : nil}
       @@projects << item
     end
 
@@ -35,8 +35,7 @@ class Project
     end
 
     def categories
-      @@categories.map do |cat|
-        key = cat[:key].to_sym
+      @@categories.map do |key, cat|
         cat.merge({
           :key  => key,
           :path => (f = by_category(key).first) && begin f.path rescue nil end
@@ -44,8 +43,8 @@ class Project
       end
     end
 
-    def process_items(items)
-      load items
+    def process_items(items, categories)
+      load items, categories
 
       # add items with category to projects list
       items.each do |it|
