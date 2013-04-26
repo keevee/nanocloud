@@ -17,9 +17,12 @@
 /.powrc
 /.sass-cache
 
+
 /content
 /layouts
 /output
-/.idea
-
+/lib/helpers.rb
+/lib/default.rb
+/lib/filters.rb
+/config.yaml
 /Rules_preprocess_local

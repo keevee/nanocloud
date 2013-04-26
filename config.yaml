@@ -1,12 +1,1 @@
-site: inselfilm
-othersite: werwiewas
-othersite_domain: werwiewas.com
-navi:
-  - [start,          {path: ''}]
-  - [in-entwicklung, {name: in Entwicklung}]
-  - [filme,          {}]
-  - [kontakt,        {}]
-# languages: ['de', 'en']
-languages: ['de']
-facebook_feed: 'https://graph.facebook.com/254119458040081/feed'
-facebook_token: '337489686345053|uOWuTFuPoYYGzZMdKbaByyejcO0'
+/Users/aljoscha/Sites/inselfilm/config.yaml
