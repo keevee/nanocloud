@@ -1,3 +1,5 @@
+require 'coffee-script'
+
 class ListFilter < Nanoc3::Filter
   identifier :list
   type :text
@@ -26,5 +28,12 @@ class AutolinkFilter < Nanoc3::Filter
     content = content.gsub(/([\w._-]+@\w+\.\w+)/, "<a href='mailto:\\1'>\\1</a>")
     content = content.gsub(/([\w_-]+\.\w+\.\w+)/, "<a href='http://\\1'>\\1</a>")
   end
+end
 
+class CoffeeFilter < Nanoc3::Filter
+  identifier :coffee
+
+  def run(content, params = {})
+    CoffeeScript.compile(content)
+  end
 end
