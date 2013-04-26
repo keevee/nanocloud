@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '1.9.3'
+ruby '1.9.2'
 
 if RUBY_VERSION =~ /1.9/
   Encoding.default_external = Encoding::UTF_8
@@ -16,6 +16,9 @@ gem 'nanoc', :git => 'git://github.com/momolog/nanoc.git'
 # gem 'nanoc', :git => 'git@github.com:ddfreyne/nanoc.git', :branch => 'release-3.3.x'
 # gem 'nanoc', :git => 'git@github.com:momolog/nanoc.git', :branch => 'debug'
 # gem 'nanoc', :path => '~/gem/nanoc'
+
+# newer nokogiri versions give: Incompatible library version: nokogiri.bundle requires version 11.0.0 or later, but libxml2.2.dylib provides version 10.0.0
+gem 'nokogiri', '~> 1.4.7'
 
 gem 'pg'
 gem 'heroku-api'
