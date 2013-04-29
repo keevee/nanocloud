@@ -12,17 +12,18 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
+/crash.log
 /tmp
 
 /.powrc
 /.sass-cache
 
-
 /content
 /layouts
 /output
-/lib/helpers.rb
+/lib/helpers_local.rb
+/lib/filters_local.rb
 /lib/default.rb
-/lib/filters.rb
 /config.yaml
-/Rules_preprocess_local
+/rules_preprocess.rb
+/rules_compile.rb

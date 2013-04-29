@@ -50,6 +50,11 @@ module MoreLinkHelper
     item.children.sort{|p1, p2| (p2[:prio] || 0) <=> (p1[:prio] || 0) }
   end
 
+  def first_child_identifier(item)
+    return nil if item.children.size == 0
+    sorted_children(item).first.identifier
+  end
+
   def title_for(item)
     (n = item[:name]) ? "#{@config[:site]}: #{n}" : @config[:site]
   end

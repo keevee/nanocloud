@@ -17,10 +17,12 @@
 # preprocessing, here we are setting up the category pages and the submenu for categorized pages
 
 preprocess do
-  eval File.read('Rules_preprocess_local') if File.exist? 'Rules_preprocess_local'
+  eval File.read('rules_preprocess.rb') if File.exist? 'rules_preprocess.rb'
 end
 
 # compile rules
+
+eval File.read('rules_compile.rb') if File.exist? 'rules_compile.rb'
 
 compile '/assets/coffee/*/' do
   filter :erb
@@ -32,26 +34,6 @@ compile '/assets/sass/*/' do
   filter :sass
 end
 
-compile '/projekte/*/*_mehr' do
-  case item[:extension]
-    when 'md', 'txt'
-      filter :kramdown
-    else
-      filter :haml
-  end
-end
-
-compile '/*', :rep => :nolayout do
-  case item[:extension]
-    when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'mov', 'webm', 'css'
-    when 'html'
-    when 'md', 'txt'
-      filter :kramdown
-    when 'haml'
-      filter :haml
-  end
-end
-
 compile '/*' do
   case item[:extension]
     when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'mov', 'webm', 'css'
@@ -60,7 +42,7 @@ compile '/*' do
       filter :kramdown
       layout item[:layout] || 'default'
     else
-      filter :haml
+      filter :slim
       layout item[:layout] ||'default'
   end
 end
@@ -76,13 +58,6 @@ route '/assets/sass/*/' do
   item.identifier.sub(%r{^/assets/sass}, '/stylesheets').chop + '.css'
 end
 
-route '*', :rep => :nolayout do
-  case item[:extension]
-    when 'haml', 'txt'
-      item.identifier + 'index.txt'
-  end
-end
-
 route '*' do
   case item[:extension]
     when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'mov', 'webm', 'css'
@@ -94,4 +69,4 @@ end
 
 # layout rules
 
-layout '*', :haml
+layout '*', :slim

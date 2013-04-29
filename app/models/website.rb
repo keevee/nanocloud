@@ -50,7 +50,7 @@ class Website < ActiveRecord::Base
         Rails.logger.info ">>> importing layouts ..."
         input_bucket['layouts'].copy_to                 local['layouts']
 
-        ['lib/helpers.rb', 'lib/filters.rb', 'Rules_preprocess_local', 'config.yaml'].each do |file|
+        ['lib/helpers.rb', 'lib/filters.rb', 'rules_preprocess', 'config.yaml'].each do |file|
           if input_bucket[file].exist?
             Rails.logger.info ">>> copying #{file}"
             input_bucket[file].copy_to local[file]

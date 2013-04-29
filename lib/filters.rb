@@ -5,6 +5,7 @@ class ListFilter < Nanoc3::Filter
   type :text
 
   def run(content, params={})
+    p "LIST FILTER!! #{content}"
     '<p>'+content.gsub(/^(.*?:) (.*)$/, '<span class="label">\1</span> \2<br>')
   end
 end

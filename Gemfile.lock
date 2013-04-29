@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/momolog/nanoc.git
-  revision: f2ef1e263e6c0d13c917eb8d2a5085268ea041b5
-  specs:
-    nanoc (3.5.0)
-      cri (~> 2.2)
-
-GIT
   remote: git://github.com/momolog/vfs.git
   revision: cfe28f74e17389571383eacb2935332cad2daa2a
   specs:
@@ -140,6 +133,8 @@ GEM
     mime-types (1.19)
     multi_json (1.5.0)
     multi_xml (0.5.1)
+    nanoc (3.6.3)
+      cri (~> 2.3)
     nanoc-cachebuster (0.3.1)
       nanoc (>= 3.3.0)
     nokogiri (1.4.7)
@@ -190,7 +185,7 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.10.0)
     rubypants (0.2.0)
-    sass (3.1.19)
+    sass (3.2.8)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -241,7 +236,7 @@ DEPENDENCIES
   kramdown (~> 0.13)
   maruku
   mime-types
-  nanoc!
+  nanoc
   nanoc-cachebuster
   nokogiri (~> 1.4.7)
   pg
@@ -249,7 +244,7 @@ DEPENDENCIES
   rails (~> 3.2.0)
   rainpress (~> 1.0)
   rspec-rails
-  sass (~> 3.1)
+  sass (~> 3)
   sass-rails (~> 3.2.3)
   slim
   sqlite3
