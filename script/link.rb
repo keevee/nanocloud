@@ -4,6 +4,8 @@ project = ARGV[0] or raise 'no project given'
 path    = File.expand_path("~/Sites/#{project}")
 File.exists?(path) or raise "project #{path} does not exist"
 
+`rm -r output`
+
 %w(
   content
   layouts
