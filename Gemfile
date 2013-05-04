@@ -11,11 +11,7 @@ gem 'rails', '~> 3.2.0'
 gem 'delayed_job_active_record'
 
 gem 'nanoc'
-# gem 'nanoc', :git => 'git://github.com/momolog/nanoc.git'
-# gem 'nanoc', :git => 'git@github.com:ddfreyne/nanoc.git'
-# gem 'nanoc', :git => 'git@github.com:ddfreyne/nanoc.git', :branch => 'release-3.3.x'
-# gem 'nanoc', :git => 'git@github.com:momolog/nanoc.git', :branch => 'debug'
-# gem 'nanoc', :path => '~/gem/nanoc'
+gem 'nanoc-cachebuster'
 
 # newer nokogiri versions give: Incompatible library version: nokogiri.bundle requires version 11.0.0 or later, but libxml2.2.dylib provides version 10.0.0
 gem 'nokogiri', '~> 1.4.7'

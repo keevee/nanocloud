@@ -1,10 +1,14 @@
+require 'nanoc/cachebuster'
+
 include Nanoc3::Helpers::Rendering
 include Nanoc3::Helpers::Filtering
 include Nanoc3::Helpers::LinkTo
+include Nanoc::Helpers::CacheBusting
 
-module MoreLinkHelper
+module TraversalHelper
+  DIR = '[^/]+/'
   def more_link
-    more = @item.path.gsub /\/$/, '_mehr/'
+    more = @item.path+'mehr/'
     "<p><a class='detail' href='#{more}'>[mehr]</a>"
   end
 
@@ -16,6 +20,10 @@ module MoreLinkHelper
     if item && item.children
       (img = item.children.detect{|i| image?(i) }) ? img.path : nil
     end
+  end
+
+  def first_child_item(identifier)
+    sorted(@items.select{|i| i.identifier =~ %r{^#{identifier}[^/]+/$}}).first
   end
 
   def first_image_named_for(item, name)
@@ -38,16 +46,33 @@ module MoreLinkHelper
     end
   end
 
+  # returns a string usable as html id
   def identifier_class(item)
     item.identifier.gsub(/^\//, '').gsub(/\/$/,'').gsub(/\//,'-')
   end
 
+  def sorted(items)
+    items.sort{|p1, p2| (p2[:prio] || 0) <=> (p1[:prio] || 0) }
+  end
+
   def sorted_siblings(item)
-    item.parent.children.sort{|p1, p2| (p2[:prio] || 0) <=> (p1[:prio] || 0) }
+    pseudo_parent = item.identifier.gsub(%r{#{DIR}$}, '')
+    siblings = @items.select{|i| i.identifier =~ %r{^#{pseudo_parent}#{DIR}$}}
+    sorted(siblings)
+  end
+
+  def sorted_contents(item)
+    contents = @items.select{|i| i.identifier =~ %r{^#{item.identifier}#{DIR}$}}
+    sorted(contents)
+  end
+
+  def sorted_sub_contents(item)
+    contents = @items.select{|i| i.identifier =~ %r{^#{item.identifier}#{DIR}#{DIR}$}}
+    sorted(contents)
   end
 
   def sorted_children(item)
-    item.children.sort{|p1, p2| (p2[:prio] || 0) <=> (p1[:prio] || 0) }
+    sorted(item.children)
   end
 
   def first_child_identifier(item)
@@ -64,7 +89,7 @@ module MoreLinkHelper
   end
 
 end
-include MoreLinkHelper
+include TraversalHelper
 
 module LanguageHelper
   def language_code_of(item)

@@ -27,11 +27,13 @@ eval File.read('rules_compile.rb') if File.exist? 'rules_compile.rb'
 compile '/assets/coffee/*/' do
   filter :erb
   filter :coffee
+  filter :cache_buster
 end
 
 compile '/assets/sass/*/' do
   filter :erb
   filter :sass
+  filter :cache_buster
 end
 
 compile '/*' do
@@ -41,21 +43,27 @@ compile '/*' do
     when 'md', 'txt'
       filter :kramdown
       layout item[:layout] || 'default'
+      filter :cache_buster
     else
+      puts "processing #{item.identifier}"
       filter :slim
       layout item[:layout] ||'default'
+      filter :cache_buster
   end
 end
 
 # routing rules
 
-# so that the /assets/coffee/ item is copied to /javascripts/ item
-route '/assets/coffee/*/' do
-  item.identifier.sub(%r{^/assets/coffee}, '/javascripts').chop + '.js'
-end
+route '/assets/*' do
+  ext = item[:extension]
+  ext = 'js'  if ext == 'coffee'
+  ext = 'css' if ext == 'sass'
 
-route '/assets/sass/*/' do
-  item.identifier.sub(%r{^/assets/sass}, '/stylesheets').chop + '.css'
+  fp = cachebust?(item) ? fingerprint(item[:filename]) : ''
+  item.identifier.
+    sub(%r{^/assets/coffee/}, '/javascripts/').
+    sub(%r{^/assets/sass/},   '/stylesheets/').
+    chop + fp + '.' + ext
 end
 
 route '*' do
