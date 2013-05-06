@@ -14,8 +14,10 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
-# preprocessing, here we are setting up the category pages and the submenu for categorized pages
+MEDIA           = %w{ png jpg jpeg gif ico pdf mp4 mov webm }
+COMPILED_FILES  = %w{ js css html txt cur }
 
+# preprocessing, here we are setting up the category pages and the submenu for categorized pages
 preprocess do
   eval File.read('rules_preprocess.rb') if File.exist? 'rules_preprocess.rb'
 end
@@ -38,16 +40,19 @@ end
 
 compile '/*' do
   case item[:extension]
-    when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'mov', 'webm', 'css'
-    when 'html'
-    when 'md', 'txt'
+    when 'md'
       filter :kramdown
-      layout item[:layout] || 'default'
-      filter :cache_buster
-    else
-      puts "processing #{item.identifier}"
+    when 'slim'
       filter :slim
-      layout item[:layout] ||'default'
+  end
+
+  case item[:extension]
+    when 'md', 'slim'
+      if item[:layouts]
+        item[:layouts].each{|l| layout l }
+      else
+        layout 'default'
+      end
       filter :cache_buster
   end
 end
@@ -68,8 +73,12 @@ end
 
 route '*' do
   case item[:extension]
-    when 'png', 'jpg', 'jpeg', 'gif', 'cur', 'js', 'ico', 'php', 'pdf', 'mp4', 'mov', 'webm', 'css'
+    when *COMPILED_FILES
       item.identifier.chop + '.' + item[:extension]
+    when *MEDIA
+      # for images you do not want fingerprinted, like constructed in js, add "nocache" somewhere inside the path
+      fp = (item[:filename] =~ /nocache/) ? '' : fingerprint(item[:filename])
+      item.identifier.chop + fp + '.' + item[:extension]
     else
       item[:route] || item.identifier + 'index.html'
   end
