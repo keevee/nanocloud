@@ -6,9 +6,9 @@ GIT
 
 GIT
   remote: git://github.com/momolog/vos.git
-  revision: cd7554c6bec1a2b0e8b29d2bfeedcf25e2b32981
+  revision: 8de32a45bc4af9b41f3b150904471ecd52ada306
   specs:
-    vos (0.0.1)
+    vos (0.0.2)
 
 GEM
   remote: https://rubygems.org/
@@ -137,6 +137,9 @@ GEM
       cri (~> 2.3)
     nanoc-cachebuster (0.3.1)
       nanoc (>= 3.3.0)
+    net-sftp (2.1.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.6.7)
     nokogiri (1.4.7)
     orm_adapter (0.4.0)
     pg (0.13.2)
@@ -238,6 +241,8 @@ DEPENDENCIES
   mime-types
   nanoc
   nanoc-cachebuster
+  net-sftp
+  net-ssh
   nokogiri (~> 1.4.7)
   pg
   rack (~> 1.2)
