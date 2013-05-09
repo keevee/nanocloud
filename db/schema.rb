@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116214153) do
+ActiveRecord::Schema.define(:version => 20130508143928) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string    "resource_id",   :null => false
@@ -85,12 +85,15 @@ ActiveRecord::Schema.define(:version => 20130116214153) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "websites", :force => true do |t|
-    t.string    "name"
-    t.string    "input_bucket_name"
-    t.string    "output_bucket_name"
-    t.string    "preview_bucket_name"
-    t.timestamp "compiled_at"
-    t.integer   "user_id"
+    t.string   "name"
+    t.string   "input_bucket_name"
+    t.string   "output_bucket_name"
+    t.string   "preview_bucket_name"
+    t.datetime "compiled_at"
+    t.integer  "user_id"
+    t.string   "host"
+    t.string   "username"
+    t.string   "password"
   end
 
 end

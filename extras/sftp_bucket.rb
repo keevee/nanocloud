@@ -1,6 +1,6 @@
 require "vfs"
 require "vos"
-require 'vos/drivers/s3'
+require 'vos/drivers/ssh'
 
 module SFTPBucket
   @@buckets = {}

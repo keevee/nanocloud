@@ -1,4 +1,5 @@
 require 's3_bucket'
+require 'sftp_bucket'
 require 'managed_job'
 require 'heroku_manager'
 
@@ -25,35 +26,45 @@ class Website < ActiveRecord::Base
 
   default_scope order('name ASC')
 
+  SOURCES = %w{ content layouts lib/helpers_local.rb lib/filters_local.rb rules_preprocess.rb rules_compile.rb config.yaml }
+
+  def get_input_bucket
+    if host && password
+      Rails.logger.info ">>> connecting to input SFTP bucket '#{input_bucket_name}' ..."
+      SFTPBucket.get host, input_bucket_name, username, password
+    else
+      Rails.logger.info ">>> connecting to input S3 bucket '#{input_bucket_name}' ..."
+      S3Bucket.get input_bucket_name,  user.aws_key, user.aws_secret
+    end
+  end
+
+  def get_output_bucket(preview)
+    bucket_name = preview ? preview_bucket_name : output_bucket_name
+    if host && password
+      Rails.logger.info ">>> connecting to input SFTP bucket '#{bucket_name}' ..."
+      SFTPBucket.get host, bucket_name, username, password
+    else
+      Rails.logger.info ">>> connecting to output bucket '#{bucket_name}' ..."
+      S3Bucket.get bucket_name,  user.aws_key, user.aws_secret
+    end
+  end
+
   def compile(preview = true)
     begin
       unless ENV['NC_RUN_LOCAL']
-        Rails.logger.info ">>> connecting to input bucket '#{input_bucket_name}' ..."
-        input_bucket  = S3Bucket.get input_bucket_name,  user.aws_key, user.aws_secret
+        input_bucket  = get_input_bucket
+        output_bucket = get_output_bucket(preview)
+        local         = Rails.root.to_s.to_entry
 
-        if preview
-          Rails.logger.info ">>> connecting to preview bucket '#{preview_bucket_name}' ..."
-          output_bucket  = S3Bucket.get preview_bucket_name,  user.aws_key, user.aws_secret
-        else
-          Rails.logger.info ">>> connecting to output bucket '#{output_bucket_name}' ..."
-          output_bucket = S3Bucket.get output_bucket_name, user.aws_key, user.aws_secret
-        end
-
-        local = Rails.root.to_s.to_entry
-
-        local['content'].destroy
-        local['layouts'].destroy
         local['output'].destroy
 
-        Rails.logger.info ">>> importing content ..."
-        input_bucket['content'].copy_to                 local['content']
-        Rails.logger.info ">>> importing layouts ..."
-        input_bucket['layouts'].copy_to                 local['layouts']
-
-        ['lib/helpers.rb', 'lib/filters.rb', 'rules_preprocess', 'config.yaml'].each do |file|
+        SOURCES.each do |file|
+          local[file].destroy
           if input_bucket[file].exist?
-            Rails.logger.info ">>> copying #{file}"
+            Rails.logger.info ">>> importing: #{file} ..."
             input_bucket[file].copy_to local[file]
+          else 
+            Rails.logger.info ">>> not found: #{file} ..."
           end
         end
       else
@@ -75,13 +86,13 @@ class Website < ActiveRecord::Base
       end
 
       unless ENV['NC_RUN_LOCAL']
-        Rails.logger.info ">>> Starting upload of result ..."
+        Rails.logger.info ">>> exporting: output ..."
         local['output'].copy_to output_bucket['']
 
         update_attribute :compiled_at, Time.now
       end
 
-      message = 'Success! Uploaded result to S3.'
+      message = 'Success! Uploaded result.'
     rescue SocketError, AWS::Errors::Base => e
       message = "Socket Error: Could not connect to buckets."
       Rails.logger.error e
