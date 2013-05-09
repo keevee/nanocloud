@@ -6,9 +6,9 @@ GIT
 
 GIT
   remote: git://github.com/momolog/vos.git
-  revision: 8de32a45bc4af9b41f3b150904471ecd52ada306
+  revision: ef6b448418fed91f1f97b604257caf425070b1dd
   specs:
-    vos (0.0.2)
+    vos (0.0.3)
 
 GEM
   remote: https://rubygems.org/
