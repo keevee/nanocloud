@@ -60,13 +60,13 @@ class Website < ActiveRecord::Base
 
         SOURCES.each do |file|
           local[file].destroy
-          # if input_bucket[file].exist?
+          if input_bucket[file].exist?
             Rails.logger.info ">>> importing: #{file} ..."
             input_bucket[file].copy_to local[file]
             Rails.logger.warn "ok."
-          # else 
-          #   Rails.logger.info ">>> not found: #{file} ..."
-          # end
+          else 
+            Rails.logger.info ">>> not found: #{file} ..."
+          end
         end
       else
         Rails.logger.info "ENV['NC_RUN_LOCAL'] set, running locally"
