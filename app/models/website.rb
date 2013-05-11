@@ -34,18 +34,18 @@ class Website < ActiveRecord::Base
       SFTPBucket.get host, input_bucket_name, username, password
     else
       Rails.logger.info ">>> connecting to input S3 bucket '#{input_bucket_name}' ..."
-      S3Bucket.get input_bucket_name,  user.aws_key, user.aws_secret
+      S3Bucket.get input_bucket_name, user.aws_key, user.aws_secret
     end
   end
 
   def get_output_bucket(preview)
     bucket_name = preview ? preview_bucket_name : output_bucket_name
     if host && password
-      Rails.logger.info ">>> connecting to input SFTP bucket '#{bucket_name}' ..."
+      Rails.logger.info ">>> connecting to output SFTP bucket '#{bucket_name}' ..."
       SFTPBucket.get host, bucket_name, username, password
     else
-      Rails.logger.info ">>> connecting to output bucket '#{bucket_name}' ..."
-      S3Bucket.get bucket_name,  user.aws_key, user.aws_secret
+      Rails.logger.info ">>> connecting to output S3 bucket '#{bucket_name}' ..."
+      S3Bucket.get bucket_name, user.aws_key, user.aws_secret
     end
   end
 
@@ -60,12 +60,13 @@ class Website < ActiveRecord::Base
 
         SOURCES.each do |file|
           local[file].destroy
-          if input_bucket[file].exist?
+          # if input_bucket[file].exist?
             Rails.logger.info ">>> importing: #{file} ..."
             input_bucket[file].copy_to local[file]
-          else 
-            Rails.logger.info ">>> not found: #{file} ..."
-          end
+            Rails.logger.warn "ok."
+          # else 
+          #   Rails.logger.info ">>> not found: #{file} ..."
+          # end
         end
       else
         Rails.logger.info "ENV['NC_RUN_LOCAL'] set, running locally"
