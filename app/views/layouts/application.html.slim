@@ -4,6 +4,10 @@ html
     title N A N O C L O U D
     = stylesheet_link_tag    "application", :media => "all"
     = csrf_meta_tags
+    = yield :head
+
+    - if sheet = Rails.application.assets.find_asset("#{params[:controller].downcase}.css")
+      = stylesheet_link_tag sheet
 
   body id=params[:controller].downcase.gsub('/','-') class=params[:action].downcase
     #header
