@@ -7,7 +7,11 @@ class NanocController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @websites = current_user.websites
+    if current_user.id == 1
+      @websites = Website.all
+    else
+      @websites = current_user.websites
+    end
   end
 
   def compile
