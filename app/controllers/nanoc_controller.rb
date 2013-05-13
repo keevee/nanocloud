@@ -15,16 +15,18 @@ class NanocController < ApplicationController
   end
 
   def compile
+    data = {}
     if @website = Website.find_by_name(params[:name])
       if current_user.websites.include?(@website)
-        Delayed::Job.enqueue(CompilerJob.new(@website.id, params[:preview]=='true'))
+        job = Delayed::Job.enqueue(CompilerJob.new(@website.id, params[:preview]=='true'))
+        data[:job_id] = job.id
       else
         @output = "You are not connected to a website yet. Please <a href='mailto:post@momolog.info'>contact us</a> to set up your account.".html_safe
       end
     else
     end
 
-    render 'output', :layout => false
+    redirect_to({:action => :index}.merge(data))
   end
 
 end

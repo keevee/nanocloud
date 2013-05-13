@@ -1,6 +1,7 @@
 class JobsController < ApplicationController
   def check
-    unless @job = Delayed::Job.find(params[:id])
+    @success = false
+    unless @job = Delayed::Job.find_by_id(params[:id])
       @success = true
     end
     render :layout => false
