@@ -54,6 +54,8 @@ compile '/*' do
         layout 'default'
       end
       filter :cache_buster
+    when 'css', 'js'
+      filter :cache_buster
   end
 end
 
