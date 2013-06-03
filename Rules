@@ -14,6 +14,7 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
+RAW_FILES       = %w{ sass coffee }
 MEDIA           = %w{ png jpg jpeg gif ico pdf mp4 mov webm }
 COMPILED_FILES  = %w{ js css html txt cur }
 
@@ -26,26 +27,26 @@ end
 
 eval File.read('rules_compile.rb') if File.exist? 'rules_compile.rb'
 
-compile '/assets/coffee/*/' do
-  filter :erb
-  filter :coffee
-  filter :cache_buster
-end
-
-compile '/assets/sass/*/' do
-  filter :erb
-  filter :sass
-  filter :cache_buster
-end
-
 compile '/*' do
+  # compile phase
   case item[:extension]
+    when 'coffee'
+      filter :erb
+      filter :coffee
+      filter :cache_buster
+    when 'sass'
+      filter :erb
+      filter :sass
+      filter :cache_buster
+    when 'css', 'js'
+      filter :cache_buster
     when 'md'
       filter :kramdown
     when 'slim'
       filter :slim
   end
 
+  # layout phase
   case item[:extension]
     when 'md', 'slim'
       if item[:layouts]
@@ -54,27 +55,19 @@ compile '/*' do
         layout 'default'
       end
       filter :cache_buster
-    when 'css', 'js'
-      filter :cache_buster
   end
 end
 
 # routing rules
 
-route '/assets/*' do
-  ext = item[:extension]
-  ext = 'js'  if ext == 'coffee'
-  ext = 'css' if ext == 'sass'
-
-  fp = cachebust?(item) ? fingerprint(item[:filename]) : ''
-  item.identifier.
-    sub(%r{^/assets/coffee/}, '/javascripts/').
-    sub(%r{^/assets/sass/},   '/stylesheets/').
-    chop + fp + '.' + ext
-end
-
 route '*' do
   case item[:extension]
+    when *RAW_FILES
+      fp = cachebust?(item) ? fingerprint(item[:filename]) : ''
+      ext = item[:extension]
+      ext = 'js'  if ext == 'coffee'
+      ext = 'css' if ext == 'sass'
+      item.identifier.chop + fp + '.' + ext
     when *COMPILED_FILES
       item.identifier.chop + '.' + item[:extension]
     when *MEDIA
