@@ -19,6 +19,7 @@ class NanocController < ApplicationController
     if @website = Website.find_by_name(params[:name])
       if current_user.websites.include?(@website)
         job = Delayed::Job.enqueue(CompilerJob.new(@website.id, params[:preview]=='true'))
+        @website.update_attribute :delayed_job_id, job.id
         data[:job_id] = job.id
       else
         @output = "You are not connected to a website yet. Please <a href='mailto:post@momolog.info'>contact us</a> to set up your account.".html_safe
