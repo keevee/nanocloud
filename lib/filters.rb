@@ -37,3 +37,18 @@ class CoffeeFilter < Nanoc3::Filter
     CoffeeScript.compile(content)
   end
 end
+
+class Thumbnailize < Nanoc::Filter
+  identifier :thumbnailize
+  type       :binary
+
+  def run(filename, params={})
+    system(
+      'convert',
+      '-resize',
+      params[:size].to_s,
+      filename,
+      output_filename
+    )
+  end
+end
