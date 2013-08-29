@@ -5,8 +5,9 @@ Nanocloud::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
 
-  match 'compile'   => 'nanoc#compile', :as => :compile
-  match 'dashboard' => 'nanoc#index'
+  match 'compile'         => 'nanoc#compile', :as => :compile
+  match 'dashboard'       => 'nanoc#index'
+  match 'jobs/:id/check'  => 'jobs#check'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
