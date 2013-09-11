@@ -15,6 +15,7 @@
 /crash.log
 /tmp
 
+/.idea
 /.powrc
 /.sass-cache
 

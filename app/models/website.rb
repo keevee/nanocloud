@@ -50,6 +50,8 @@ class Website < ActiveRecord::Base
   end
 
   def compile(preview = true)
+    logger = FirebaseLogger.new self.delayed_job_id
+    Rails.logger.warn "####logger: #{logger.inspect} - #{}###"
     begin
       unless ENV['NC_RUN_LOCAL']
         input_bucket  = get_input_bucket
@@ -61,33 +63,33 @@ class Website < ActiveRecord::Base
         SOURCES.each do |file|
           local[file].destroy
           if input_bucket[file].exist?
-            Rails.logger.info ">>> importing: #{file} ..."
+            logger.info ">>> importing: #{file} ..."
             input_bucket[file].copy_to local[file]
-            Rails.logger.warn "ok."
+            logger.warn "ok."
           else 
-            Rails.logger.info ">>> not found: #{file} ..."
+            logger.info ">>> not found: #{file} ..."
           end
         end
       else
-        Rails.logger.info "ENV['NC_RUN_LOCAL'] set, running locally"
+        logger.info "ENV['NC_RUN_LOCAL'] set, running locally"
       end
 
-      Rails.logger.info "##########"
+      logger.info "##########"
 
       begin
         # nanoc.compile
-        Rails.logger.warn ">>> Compilation:"
-        Rails.logger.warn `bundle exec nanoc co`
+        logger.warn ">>> Compilation:"
+        logger.warn `bundle exec nanoc co`
       rescue Exception => e
-        Rails.logger.error ">>> nanoc compilation exception:"
-        Rails.logger.error e.class
-        Rails.logger.error e
-        Rails.logger.error e.backtrace
+        logger.error ">>> nanoc compilation exception:"
+        logger.error e.class
+        logger.error e
+        logger.error e.backtrace
         raise NanocCompilationException, e.message
       end
 
       unless ENV['NC_RUN_LOCAL']
-        Rails.logger.info ">>> exporting: output ..."
+        logger.info ">>> exporting: output ..."
         local['output'].copy_to output_bucket['']
 
         update_attribute :compiled_at, Time.now
@@ -96,14 +98,14 @@ class Website < ActiveRecord::Base
       message = 'Success! Uploaded result.'
     rescue SocketError, AWS::Errors::Base => e
       message = "Socket Error: Could not connect to buckets."
-      Rails.logger.error e
-      Rails.logger.error e.backtrace
+      logger.error e
+      logger.error e.backtrace
     rescue NanocCompilationException => e
       message = "Compilation Error: #{e.class} #{e}\n"
     rescue Exception => e
       message = "Unknown Error: #{e.class} #{e}\n"
-      Rails.logger.error "#{e}"
-      Rails.logger.error e.backtrace
+      logger.error "#{e}"
+      logger.error e.backtrace
     end
     message
   end

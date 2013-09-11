@@ -23,6 +23,6 @@ div= @message
               = website.output_bucket_name
           td
             a.btn.btn-danger href='/compile?name=#{website.name}' #{I18n.t :build_live}
-    #output
+    pre#output
   - else
     p.lead You don't have any websites yet.  :(

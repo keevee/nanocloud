@@ -98,6 +98,9 @@ GEM
       warden (~> 1.2.1)
     diff-lcs (1.1.3)
     erubis (2.7.0)
+    ethon (0.6.1)
+      ffi (>= 1.3.0)
+      mime-types (~> 1.18)
     excon (0.16.7)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -107,6 +110,10 @@ GEM
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
     fastercsv (1.5.5)
+    ffi (1.9.0)
+    firebase (0.1.4)
+      json
+      typhoeus (>= 0.6.1)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     haml (3.1.6)
@@ -221,6 +228,8 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    typhoeus (0.6.5)
+      ethon (~> 0.6.1)
     typogruby (1.0.15)
       rubypants
     tzinfo (0.3.35)
@@ -246,6 +255,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise (~> 2.2)
   factory_girl_rails
+  firebase
   haml
   heroku-api
   jquery-rails

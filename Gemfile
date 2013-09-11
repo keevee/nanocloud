@@ -7,6 +7,7 @@ if RUBY_VERSION =~ /1.9/
 end
 
 gem 'rails', '~> 3.2.0'
+gem 'firebase'
 
 gem 'delayed_job_active_record'
 

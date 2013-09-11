@@ -15,13 +15,18 @@
 #= require jquery_ujs
 #= require bootstrap
 #= require_tree .
+#= require firebase
 
 getURLParameter = (name) ->
   component = (new RegExp("[?|&]#{name}=([^&;]+?)(&|##|;|$)").exec(location.search) || [null,""] )[1].replace(/\+/g, '%20')
   decodeURIComponent(component) || null
 
+fbroot = undefined
 $ ->
   if jobId = getURLParameter('job_id')
-    setInterval ->
-      $('#output').load('/jobs/'+jobId+'/check')
-    , 5000
+    fbroot = new Firebase("https://nanocloud.firebaseio.com/logs/"+jobId)
+    fbroot.on "child_added", (childSnapshot, prevChildName) ->
+
+      msg = childSnapshot.val().message
+      $("#output").html(childSnapshot.val().severity + ":" + (if typeof(msg)=="object" then msg.join('\n') else msg ) + "\n\n" + $("#output").html())
+
