@@ -29,7 +29,7 @@ group :test do
   gem 'debugger'
 end
 
-gem 'rspec-rails'
+gem 'rspec-rails', '~> 2.10.1'
 
 gem 'slim'
 gem 'aws-sdk'

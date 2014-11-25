@@ -25,6 +25,7 @@ class NanocController < ApplicationController
         @output = "You are not connected to a website yet. Please <a href='mailto:post@momolog.info'>contact us</a> to set up your account.".html_safe
       end
     else
+      Rails.logger.warn "Website not found #{params[:name]}"
     end
 
     redirect_to({:action => :index}.merge(data))
