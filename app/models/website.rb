@@ -10,14 +10,12 @@ class CompilerJob < ManagedJob
   attr_accessor :website_id, :preview
 
   def initialize(website_id, preview=true)
-    Rails.logger.warn "initialize compiler job for #{website_id} preview: #{preview}"
     self.website_id = website_id
     self.preview    = preview
     super()
   end
 
   def perform
-    Rails.logger.warn "perform compiler job for #{website_id} preview: #{preview}"
     Website.find(website_id).compile(preview)
   end
 end
