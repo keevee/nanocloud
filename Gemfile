@@ -11,7 +11,7 @@ gem 'firebase'
 
 gem 'delayed_job_active_record'
 
-gem 'nanoc'
+gem 'nanoc', '~> 3.3.6'
 gem 'nanoc-cachebuster'
 
 # newer nokogiri versions give: Incompatible library version: nokogiri.bundle requires version 11.0.0 or later, but libxml2.2.dylib provides version 10.0.0
@@ -65,7 +65,9 @@ gem 'coffee-rails',   '~> 3.2.1'
 
 gem 'uglifier', '>= 1.0.3'
 
-gem 'jquery-rails'
+# downgrade because of activeadmin incompatibility
+# http://stackoverflow.com/questions/16844411/rails-active-admin-deployment-couldnt-find-file-jquery-ui
+gem "jquery-rails", "< 3.0.0"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
