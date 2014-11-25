@@ -6,8 +6,8 @@ if RUBY_VERSION =~ /1.9/
   Encoding.default_internal = Encoding::UTF_8
 end
 
-gem 'rails', '~> 3.2.0'
-gem 'firebase'
+gem 'rails',    '~> 3.2.0'
+gem 'firebase', '~> 0.1.4'
 
 gem 'delayed_job_active_record'
 

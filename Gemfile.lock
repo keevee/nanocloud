@@ -117,7 +117,7 @@ GEM
       railties (>= 3.0.0)
     fastercsv (1.5.5)
     ffi (1.9.6)
-    firebase (0.2.2)
+    firebase (0.1.4)
       json
       typhoeus (>= 0.6.1)
     formtastic (3.1.2)
@@ -264,7 +264,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise (~> 2.2)
   factory_girl_rails
-  firebase
+  firebase (~> 0.1.4)
   haml
   heroku-api
   jquery-rails (< 3.0.0)
