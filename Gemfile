@@ -47,15 +47,13 @@ gem 'typogruby',  '~>1.0'
 gem 'jsmin',      '~>1.0'
 gem 'rack',       '~>1.2'
 gem 'adsf',       '~>1.0'
-gem 'nanoc-cachebuster'
 gem 'coffee-script'
 gem 'sass',       '~>3'
 gem 'haml'
 gem 'mime-types'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
+group :production do
+  gem 'rails_12factor'
 end
 
 gem 'bootstrap-sass', '~> 2.1.0.0'
