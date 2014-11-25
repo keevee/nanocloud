@@ -1,7 +1,10 @@
 class ManagedJob
   def initialize
+    Rails.logger.warn "ManagedJob: initialize"
     if Rails.env.production?
       @heroku ||= HerokuManager.new
+      Rails.logger.warn "ManagedJob: get_workers #{@heroku.get_workers}"
+
       @heroku.set_workers(1) if (@heroku.get_workers == 0)
     end 
   end
