@@ -27,6 +27,10 @@ $ ->
     fbroot = new Firebase("https://nanocloud.firebaseio.com/logs/"+jobId)
     fbroot.on "child_added", (childSnapshot, prevChildName) ->
 
-      msg = childSnapshot.val().message
-      $("#output").html(childSnapshot.val().severity + ":" + (if typeof(msg)=="object" then msg.join('\n') else msg ) + "\n\n" + $("#output").html())
+      message = childSnapshot.val().message
+      message = message.join('\n') if typeof(message) == 'object'
+
+      level   = childSnapshot.val().severity
+
+      $('#output').html(+$('#output').html("#{message}\n"))
 
