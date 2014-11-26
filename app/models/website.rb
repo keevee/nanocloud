@@ -79,7 +79,7 @@ class Website < ActiveRecord::Base
       begin
         # nanoc.compile
         logger.warn ">>> Compilation:"
-        logger.warn `bundle exec nanoc co`
+        logger.warn `bundle exec nanoc co 2>&1`
       rescue Exception => e
         logger.error ">>> nanoc compilation exception:"
         logger.error e.class
