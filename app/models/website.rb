@@ -91,6 +91,7 @@ class Website < ActiveRecord::Base
         local['output'].copy_to output_bucket['']
 
         update_attribute :compiled_at, Time.now
+        @logger.info "DONE :-)"
       end
 
       message = 'Success! Uploaded result.'
