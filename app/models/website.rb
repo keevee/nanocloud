@@ -30,10 +30,10 @@ class Website < ActiveRecord::Base
 
   def get_input_bucket
     if host && password
-      Rails.logger.info ">>> connecting to input SFTP bucket '#{input_bucket_name}' ..."
+      @logger.info ">>> connecting to input SFTP bucket '#{input_bucket_name}' ..."
       SFTPBucket.get host, input_bucket_name, username, password
     else
-      Rails.logger.info ">>> connecting to input S3 bucket '#{input_bucket_name}' ..."
+      @logger.info ">>> connecting to input S3 bucket '#{input_bucket_name}' ..."
       S3Bucket.get input_bucket_name, user.aws_key, user.aws_secret
     end
   end
@@ -41,17 +41,16 @@ class Website < ActiveRecord::Base
   def get_output_bucket(preview)
     bucket_name = preview ? preview_bucket_name : output_bucket_name
     if host && password
-      Rails.logger.info ">>> connecting to output SFTP bucket '#{bucket_name}' ..."
+      @logger.info "connecting to output SFTP bucket '#{bucket_name}' ..."
       SFTPBucket.get host, bucket_name, username, password
     else
-      Rails.logger.info ">>> connecting to output S3 bucket '#{bucket_name}' ..."
+      @logger.info "connecting to output S3 bucket '#{bucket_name}' ..."
       S3Bucket.get bucket_name, user.aws_key, user.aws_secret
     end
   end
 
   def compile(preview = true)
-    logger = FirebaseLogger.new self.delayed_job_id
-    Rails.logger.warn "####logger: #{logger.inspect} - #{}###"
+    @logger = FirebaseLogger.new self.delayed_job_id
     begin
       unless ENV['NC_RUN_LOCAL']
         input_bucket  = get_input_bucket
@@ -63,33 +62,33 @@ class Website < ActiveRecord::Base
         SOURCES.each do |file|
           local[file].destroy
           if input_bucket[file].exist?
-            logger.info ">>> importing: #{file} ..."
+            @logger.info "importing: #{file} ..."
             input_bucket[file].copy_to local[file]
-            logger.warn "ok."
+            @logger.info "ok."
           else 
-            logger.info ">>> not found: #{file} ..."
+            @logger.warn "not found: #{file} ..."
           end
         end
       else
-        logger.info "ENV['NC_RUN_LOCAL'] set, running locally"
+        @logger.info "ENV['NC_RUN_LOCAL'] set, running locally"
       end
 
-      logger.info "##########"
+      @logger.info "##########"
 
       begin
         # nanoc.compile
-        logger.warn ">>> Compilation:"
-        logger.warn `bundle exec nanoc co 2>&1`
+        @logger.info "Compilation:"
+        @logger.info `bundle exec nanoc co 2>&1`
       rescue Exception => e
-        logger.error ">>> nanoc compilation exception:"
-        logger.error e.class
-        logger.error e
-        logger.error e.backtrace
+        @logger.error "nanoc compilation exception:"
+        @logger.error e.class
+        @logger.error e
+        @logger.error e.backtrace
         raise NanocCompilationException, e.message
       end
 
       unless ENV['NC_RUN_LOCAL']
-        logger.info ">>> exporting: output ..."
+        @logger.info "exporting: output ..."
         local['output'].copy_to output_bucket['']
 
         update_attribute :compiled_at, Time.now
@@ -98,14 +97,14 @@ class Website < ActiveRecord::Base
       message = 'Success! Uploaded result.'
     rescue SocketError, AWS::Errors::Base => e
       message = "Socket Error: Could not connect to buckets."
-      logger.error e
-      logger.error e.backtrace
+      @logger.error e
+      @logger.error e.backtrace
     rescue NanocCompilationException => e
       message = "Compilation Error: #{e.class} #{e}\n"
     rescue Exception => e
       message = "Unknown Error: #{e.class} #{e}\n"
-      logger.error "#{e}"
-      logger.error e.backtrace
+      @logger.error "#{e}"
+      @logger.error e.backtrace
     end
     message
   end
