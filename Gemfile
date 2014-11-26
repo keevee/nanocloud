@@ -11,7 +11,7 @@ gem 'firebase', '~> 0.1.4'
 
 gem 'delayed_job_active_record'
 
-gem 'nanoc', '~> 3.3.6'
+gem 'nanoc', '~> 3.6.3'
 gem 'nanoc-cachebuster'
 
 # newer nokogiri versions give: Incompatible library version: nokogiri.bundle requires version 11.0.0 or later, but libxml2.2.dylib provides version 10.0.0
