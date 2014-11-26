@@ -30,10 +30,10 @@ class Website < ActiveRecord::Base
 
   def get_input_bucket
     if host && password
-      @logger.info ">>> connecting to input SFTP bucket '#{input_bucket_name}' ..."
+      @logger.info "connecting to input SFTP bucket '#{input_bucket_name}' ..."
       SFTPBucket.get host, input_bucket_name, username, password
     else
-      @logger.info ">>> connecting to input S3 bucket '#{input_bucket_name}' ..."
+      @logger.info "connecting to input S3 bucket '#{input_bucket_name}' ..."
       S3Bucket.get input_bucket_name, user.aws_key, user.aws_secret
     end
   end
@@ -64,7 +64,6 @@ class Website < ActiveRecord::Base
           if input_bucket[file].exist?
             @logger.info "importing: #{file} ..."
             input_bucket[file].copy_to local[file]
-            @logger.info "ok."
           else 
             @logger.warn "not found: #{file} ..."
           end
