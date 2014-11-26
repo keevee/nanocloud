@@ -32,5 +32,5 @@ $ ->
 
       level   = childSnapshot.val().severity
 
-      $('#output').html(+$('#output').html("#{message}\n"))
+      $('#output').html($('#output').html()+"<span class='level-#{level}'>#{message}</span>\n")
 
