@@ -59,6 +59,7 @@ class Website < ActiveRecord::Base
 
         local['output'].destroy
 
+        @logger.info "importing from input bucket ..."
         SOURCES.each do |file|
           local[file].destroy
           if input_bucket[file].exist?
@@ -72,26 +73,20 @@ class Website < ActiveRecord::Base
         @logger.info "ENV['NC_RUN_LOCAL'] set, running locally"
       end
 
-      @logger.info "##########"
+      @logger.info "compiling ..."
 
-      begin
-        # nanoc.compile
-        # output=`ls no_existing_file` ;  result=$?.success?
-        @logger.info "Compilation:"
-        @logger.info `bundle exec nanoc co 2>&1`
-      rescue Exception => e
-        @logger.error "nanoc compilation exception:"
-        @logger.error e.class
-        @logger.error e
-        @logger.error e.backtrace
-        raise NanocCompilationException, e.message
+      output = `bundle exec nanoc co 2>&1`
+      if $?.success?
+        @logger.info output
+      else
+        @logger.error output
       end
 
       unless ENV['NC_RUN_LOCAL']
-        @logger.info "deleting output bucket"
+        @logger.info "deleting output bucket ..."
         output_bucket.entries.each{|e| e.destroy }
 
-        @logger.info "exporting: output ..."
+        @logger.info "exporting to output bucket ..."
         local['output'].copy_to output_bucket['']
 
         update_attribute :compiled_at, Time.now
