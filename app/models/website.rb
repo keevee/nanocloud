@@ -76,11 +76,9 @@ class Website < ActiveRecord::Base
       @logger.info "compiling ..."
 
       output = `bundle exec nanoc co 2>&1`
-      if $?.success?
-        @logger.info output
-      else
-        @logger.error output
-      end
+      raise NanocCompilationException, output unless $?.success?
+
+      @logger.info output
 
       unless ENV['NC_RUN_LOCAL']
         @logger.info "deleting output bucket ..."
@@ -99,7 +97,8 @@ class Website < ActiveRecord::Base
       @logger.error e
       @logger.error e.backtrace
     rescue NanocCompilationException => e
-      message = "Compilation Error: #{e.class} #{e}\n"
+      @logger.error e.message
+      message = "Compilation Error: #{e.message}"
     rescue Exception => e
       message = "Unknown Error: #{e.class} #{e}\n"
       @logger.error "#{e}"
