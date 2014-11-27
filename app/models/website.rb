@@ -76,6 +76,7 @@ class Website < ActiveRecord::Base
 
       begin
         # nanoc.compile
+        # output=`ls no_existing_file` ;  result=$?.success?
         @logger.info "Compilation:"
         @logger.info `bundle exec nanoc co 2>&1`
       rescue Exception => e
@@ -87,6 +88,9 @@ class Website < ActiveRecord::Base
       end
 
       unless ENV['NC_RUN_LOCAL']
+        @logger.info "deleting output bucket"
+        output_bucket.entries.each{|e| e.destroy }
+
         @logger.info "exporting: output ..."
         local['output'].copy_to output_bucket['']
 
