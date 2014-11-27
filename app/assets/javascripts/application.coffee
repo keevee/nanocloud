@@ -32,5 +32,8 @@ $ ->
 
       level   = childSnapshot.val().severity
 
-      $('#output').html($('#output').html()+"<span class='level-#{level}'>#{message}</span>\n")
+      out = $('#output')
+
+      out.html(out.html()+"<span class='level-#{level}'>#{message}</span>\n")
+      out.scrollTop out[0].scrollHeight
 
