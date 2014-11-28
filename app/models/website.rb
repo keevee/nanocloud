@@ -21,7 +21,7 @@ class CompilerJob < ManagedJob
 end
 
 class Website < ActiveRecord::Base
-  attr_accessible :input_bucket_name, :name, :output_bucket_name, :preview_bucket_name, :user_id
+  attr_accessible :input_bucket_name, :name, :output_bucket_name, :preview_bucket_name, :user_id, :host, :username, :password
   belongs_to :user
 
   default_scope order('name ASC')
