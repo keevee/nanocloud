@@ -49,6 +49,12 @@ class Website < ActiveRecord::Base
     end
   end
 
+  def final_error message
+    message = @logger.error message
+    @logger.error "FAILED :-("
+    message
+  end
+
   def compile(preview = true)
     @logger = FirebaseLogger.new self.delayed_job_id
     begin
@@ -74,7 +80,6 @@ class Website < ActiveRecord::Base
       end
 
       @logger.info "compiling ..."
-
       output = `bundle exec nanoc co 2>&1`
       raise NanocCompilationException, output unless $?.success?
 
@@ -93,16 +98,11 @@ class Website < ActiveRecord::Base
 
       message = 'Success! Uploaded result.'
     rescue SocketError, AWS::Errors::Base => e
-      message = "Socket Error: Could not connect to buckets."
-      @logger.error e
-      @logger.error e.backtrace
+      message = final_error "cannot connect to bucket. #{e.message}"
     rescue NanocCompilationException => e
-      @logger.error e.message
-      message = "Compilation Error: #{e.message}"
+      message = final_error e.message
     rescue Exception => e
-      message = "Unknown Error: #{e.class} #{e}\n"
-      @logger.error "#{e}"
-      @logger.error e.backtrace
+      message = final_error e.message
     end
     message
   end

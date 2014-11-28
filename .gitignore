@@ -16,7 +16,7 @@
 /tmp
 
 /.idea
-/.powrc
+/.powenv
 /.sass-cache
 
 /content

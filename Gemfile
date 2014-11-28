@@ -10,6 +10,7 @@ gem 'rails',    '~> 3.2.0'
 gem 'firebase', '~> 0.1.4'
 
 gem 'delayed_job_active_record'
+gem 'daemons'
 
 gem 'nanoc', '~> 3.6.3'
 gem 'nanoc-cachebuster'

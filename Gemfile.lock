@@ -78,6 +78,7 @@ GEM
     columnize (0.8.9)
     cri (2.3.0)
       colored (>= 1.2)
+    daemons (1.1.9)
     deadweight (0.2.1)
       nokogiri
     debugger (1.6.8)
@@ -255,6 +256,7 @@ DEPENDENCIES
   bourbon (~> 2.1.1)
   coffee-rails (~> 3.2.1)
   coffee-script
+  daemons
   deadweight (~> 0.2)
   debugger
   delayed_job_active_record
