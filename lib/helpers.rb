@@ -22,8 +22,10 @@ module TraversalHelper
     end
   end
 
-  def first_child_item(identifier)
-    sorted(@items.select{|i| i.identifier =~ %r{^#{identifier}[^/]+/$}}).first
+  def first_child_item(identifier, no_redirect=true)
+    childs = @items.select{|i| i.identifier =~ %r{^#{identifier}[^/]+/$}}
+    childs = childs.reject{|i| i[:redirect] } if no_redirect
+    sorted(childs).first
   end
 
   def first_image_named_for(item, name)
@@ -55,9 +57,10 @@ module TraversalHelper
     items.sort{|p1, p2| (p2[:prio] || 0) <=> (p1[:prio] || 0) }
   end
 
-  def sorted_siblings(item)
+  def sorted_siblings(item, no_redirect=true)
     pseudo_parent = item.identifier.gsub(%r{#{DIR}$}, '')
     siblings = @items.select{|i| i.identifier =~ %r{^#{pseudo_parent}#{DIR}$}}
+    siblings = siblings.reject{|i| i[:redirect]} if no_redirect
     sorted(siblings)
   end
 
@@ -71,8 +74,10 @@ module TraversalHelper
     sorted(contents)
   end
 
-  def sorted_children(item)
-    sorted(item.children)
+  def sorted_children(item, no_redirect=true)
+    childs = item.children
+    childs = childs.reject{|i| i[:redirect] } if no_redirect
+    sorted(childs)
   end
 
   def first_child_identifier(item)

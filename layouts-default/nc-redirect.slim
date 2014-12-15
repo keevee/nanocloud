@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    ruby:
+      target = case @item[:redirect]
+        when :first_child
+          first_child_identifier(@item)
+        else
+          @item[:redirect]
+      end
+    meta http-equiv='refresh' content="0; url=#{target}"

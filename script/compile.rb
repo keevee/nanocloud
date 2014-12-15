@@ -17,7 +17,16 @@ File.exists?(path) or raise "project #{path} does not exist"
 ).each do |file|
   `rm -r #{file}`
   if File.exists?("#{path}/#{file}")
-    `ln -sf #{path}/#{file} #{file}`
+    `cp -r #{path}/#{file} #{file}`
   end
 end
-puts "ok."
+
+{
+  'layouts-default' => 'layouts'
+}.each do |source, target|
+  `cp #{source}/* #{target}`
+end
+
+puts "compiling..."
+
+`nanoc co`

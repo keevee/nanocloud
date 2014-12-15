@@ -27,6 +27,7 @@ class Website < ActiveRecord::Base
   default_scope order('name ASC')
 
   SOURCES = %w{ content layouts lib/helpers_local.rb lib/filters_local.rb rules_preprocess.rb rules_compile.rb config.yaml }
+  DEFAULTS = { 'layouts-default' => 'layouts' }
 
   def get_input_bucket
     if host && password
@@ -74,6 +75,11 @@ class Website < ActiveRecord::Base
           else 
             @logger.warn "not found: #{file} ..."
           end
+        end
+        @logger.info "copying defaults ..."
+        DEFAULTS.each do |source, target|
+          @logger.info "copying: #{source} ..."
+          `cp #{source}/* #{target}`
         end
       else
         @logger.info "ENV['NC_RUN_LOCAL'] set, running locally"

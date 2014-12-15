@@ -21,6 +21,10 @@ COMPILED_FILES  = %w{ js css html txt cur }
 # preprocessing, here we are setting up the category pages and the submenu for categorized pages
 preprocess do
   eval File.read('rules_preprocess.rb') if File.exist? 'rules_preprocess.rb'
+
+  @items.each do |item|
+    item[:layouts] = ['nc-redirect'] if item[:redirect]
+  end
 end
 
 # compile rules
