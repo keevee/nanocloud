@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 project = ARGV[0] or raise 'no project given'
 
-path    = File.expand_path("~/Sites/#{project}")
+path    = File.expand_path("~/nanoclouds/#{project}")
 File.exists?(path) or raise "project #{path} does not exist"
 
 `rm -r output`
