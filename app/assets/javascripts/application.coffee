@@ -24,7 +24,7 @@ getURLParameter = (name) ->
 
 fbroot = undefined
 $ ->
-  APP_NAME = $('body').data('appname')
+  APP_NAME = JSON.parse($('body').data('appname'))
   if jobId = getURLParameter('job_id')
     console.log "FB Base: https://nanocloud.firebaseio.com/#{APP_NAME}/logs"
     fbroot = new Firebase("https://nanocloud.firebaseio.com/#{APP_NAME}/logs/"+jobId)
