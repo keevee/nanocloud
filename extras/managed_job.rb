@@ -11,7 +11,7 @@ class ManagedJob
   def after(job)
     if Rails.env.production?
       @heroku ||= HerokuManager.new
-      @heroku.set_workers(0) if (job_count == 1)
+      @heroku.set_workers(0) if (job_count > 0)
     end
   end
 
