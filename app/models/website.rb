@@ -61,7 +61,6 @@ class Website < ActiveRecord::Base
     begin
       unless ENV['NC_RUN_LOCAL']
         input_bucket  = get_input_bucket
-        output_bucket = get_output_bucket(preview)
         local         = Rails.root.to_s.to_entry
 
         local['output'].destroy
@@ -92,6 +91,7 @@ class Website < ActiveRecord::Base
       @logger.info output
 
       unless ENV['NC_RUN_LOCAL']
+        output_bucket = get_output_bucket(preview)
         @logger.info "deleting output bucket ..."
         output_bucket.entries.each{|e| e.destroy }
 
