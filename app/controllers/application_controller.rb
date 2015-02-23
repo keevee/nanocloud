@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   layout 'application'
 
   def initialize
-    @js_data = {}
+    @js_data = {:appname => ENV['APP_NAME']}
     super
   end
 

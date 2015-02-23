@@ -16,6 +16,7 @@
 #= require bootstrap
 #= require_tree .
 #= require firebase
+#
 
 getURLParameter = (name) ->
   component = (new RegExp("[?|&]#{name}=([^&;]+?)(&|##|;|$)").exec(location.search) || [null,""] )[1].replace(/\+/g, '%20')
@@ -23,8 +24,9 @@ getURLParameter = (name) ->
 
 fbroot = undefined
 $ ->
+  APP_NAME = $('body').data('appname')
   if jobId = getURLParameter('job_id')
-    fbroot = new Firebase("https://nanocloud.firebaseio.com/logs/"+jobId)
+    fbroot = new Firebase("https://nanocloud.firebaseio.com/#{APP_NAME}/logs/"+jobId)
     fbroot.on "child_added", (childSnapshot, prevChildName) ->
 
       message = childSnapshot.val().message
