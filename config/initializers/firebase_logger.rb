@@ -1,7 +1,8 @@
 class FirebaseLogger < Logger
   @jobid = nil
   def initialize(jobid)
-    Firebase.base_uri = 'https://nanocloud.firebaseio.com/logs'
+    Firebase.base_uri = "https://nanocloud.firebaseio.com/#{APP_NAME}/logs"
+    Firebase.delete(@jobid)
     @jobid = jobid
   end
 
