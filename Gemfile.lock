@@ -211,6 +211,7 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.10.0)
+    rsync (1.0.9)
     rubypants (0.2.0)
     sass (3.2.8)
     sass-rails (3.2.5)
@@ -284,6 +285,7 @@ DEPENDENCIES
   rails_12factor
   rainpress (~> 1.0)
   rspec-rails (~> 2.10.1)
+  rsync
   sass (~> 3)
   sass-rails (~> 3.2.3)
   slim

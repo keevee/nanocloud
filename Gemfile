@@ -38,6 +38,7 @@ gem 'vfs', :git => 'git://github.com/momolog/vfs.git'
 gem 'vos', :git => 'git://github.com/momolog/vos.git'
 gem 'net-ssh'
 gem 'net-sftp'
+gem 'rsync'
 
 # filters etc
 gem 'maruku'
