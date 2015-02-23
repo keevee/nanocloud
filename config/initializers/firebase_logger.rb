@@ -1,8 +1,8 @@
 class FirebaseLogger < Logger
   @jobid = nil
   def initialize(jobid)
-    Rails.logger.warn "FB Base: https://nanocloud.firebaseio.com/#{APP_NAME}/logs"
-    Firebase.base_uri = "https://nanocloud.firebaseio.com/#{APP_NAME}/logs"
+    Rails.logger.warn "FB Base: https://nanocloud.firebaseio.com/#{ENV['APP_NAME']}/logs"
+    Firebase.base_uri = "https://nanocloud.firebaseio.com/#{ENV['APP_NAME']}/logs"
     Firebase.delete(@jobid)
     @jobid = jobid
   end
