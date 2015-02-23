@@ -26,6 +26,7 @@ fbroot = undefined
 $ ->
   APP_NAME = $('body').data('appname')
   if jobId = getURLParameter('job_id')
+    console.log "FB Base: https://nanocloud.firebaseio.com/#{APP_NAME}/logs"
     fbroot = new Firebase("https://nanocloud.firebaseio.com/#{APP_NAME}/logs/"+jobId)
     fbroot.on "child_added", (childSnapshot, prevChildName) ->
 
@@ -38,4 +39,3 @@ $ ->
 
       out.html(out.html()+"<span class='level-#{level}'>#{message}</span>\n")
       out.scrollTop out[0].scrollHeight
-
