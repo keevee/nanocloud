@@ -14,6 +14,7 @@ gem 'daemons'
 
 gem 'nanoc', '~> 3.6.3'
 gem 'nanoc-cachebuster'
+gem 'w3c_validators'
 
 # newer nokogiri versions give: Incompatible library version: nokogiri.bundle requires version 11.0.0 or later, but libxml2.2.dylib provides version 10.0.0
 gem 'nokogiri', '~> 1.4.7'
