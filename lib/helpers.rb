@@ -13,7 +13,7 @@ module TraversalHelper
   end
 
   def image?(item)
-    ['jpg', 'png', 'gif'].include? item[:extension]
+    ['jpg', 'png', 'gif', 'svg'].include? item[:extension]
   end
 
   def first_image_for(item)

@@ -29,4 +29,4 @@ end
 
 puts "compiling..."
 
-`nanoc co`
+puts `nanoc co`
