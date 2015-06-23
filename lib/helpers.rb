@@ -33,7 +33,7 @@ module TraversalHelper
   end
 
   def images_named_for(item, name)
-    item.children.select{|i| image?(i) && i.identifier =~ /#{name}/ }
+    item.children.select{|i| image?(i) && i.identifier =~ (name.is_a?(Regexp) ? name : /#{name}/) }
   end
 
   def vimeo_link(item)
