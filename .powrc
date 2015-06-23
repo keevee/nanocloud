@@ -1,4 +1,4 @@
-if [ -f "$rvm_path/scripts/rvm" ] && [ -f ".rvmrc" ]; then
+if [ -f "$rvm_path/scripts/rvm" ]; then
   source "$rvm_path/scripts/rvm"
-  source ".rvmrc"
+  rvm use .
 fi
