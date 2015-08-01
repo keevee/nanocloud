@@ -30,7 +30,7 @@ class Website < ActiveRecord::Base
   DEFAULTS = { 'layouts-default' => 'layouts' }
 
   def get_input_bucket
-    if host && password
+    if host? && password?
       @logger.info "connecting to input SFTP bucket '#{input_bucket_name}' ..."
       SFTPBucket.get host, input_bucket_name, username, password
     else
@@ -41,7 +41,7 @@ class Website < ActiveRecord::Base
 
   def get_output_bucket(preview)
     bucket_name = preview ? preview_bucket_name : output_bucket_name
-    if host && password
+    if host? && password?
       @logger.info "connecting to output SFTP bucket '#{bucket_name}' ..."
       SFTPBucket.get host, bucket_name, username, password
     else
