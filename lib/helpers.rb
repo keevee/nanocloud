@@ -97,9 +97,16 @@ end
 include TraversalHelper
 
 module LanguageHelper
+
+  # returns the language code of the item
+  # e.g. '/de/filme/rapunzel/' => 'de'
+
   def language_code_of(item)
     (item.identifier.match(/^\/([a-z]{2})\//) || [])[1]
   end
+
+  # returns all existing translations of this item, in other words
+  # all items that have the same identifier save the language code
 
   def translations_of(item)
     translations = {}
@@ -111,13 +118,19 @@ module LanguageHelper
     translations
   end
 
+  # language code of the current item
+
   def current_language
     language_code_of(@item)
   end
 
+  # e.g. currently on '/filme/', e.g
+
   def current_shortpath?(shortpath)
     !!(@item.identifier =~ /^(\/..)?\/#{shortpath.size > 0 ? "#{shortpath}/" : '$'}/)
   end
+
+  # e.g. '/filme/' => '/de/filme/'
 
   def path_for_shortpath(shortpath)
     identifier = "/#{current_language}/#{shortpath}/".gsub(/\/+/, '/')
