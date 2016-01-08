@@ -16,7 +16,12 @@ class CompilerJob < ManagedJob
   end
 
   def perform
-    Website.find(website_id).compile(preview)
+    website = Website.find(website_id)
+
+    Rails.logger.warn "\n\nCompilerJob#perform - website:"
+    Rails.logger.warn website.inspect
+
+    website.compile(preview)
   end
 end
 
