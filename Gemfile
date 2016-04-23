@@ -37,7 +37,7 @@ gem 'slim'
 gem 'aws-sdk'
 gem 'vfs', :git => 'git://github.com/momolog/vfs.git'
 gem 'vos', :git => 'git://github.com/momolog/vos.git'
-gem 'net-ssh'
+gem 'net-ssh', '~> 2.9.1'
 gem 'net-sftp'
 
 # filters etc
