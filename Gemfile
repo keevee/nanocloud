@@ -28,7 +28,7 @@ group :test do
 end
 
 gem 'slim'
-gem 'aws-sdk'
+gem 'aws-sdk', '1.5.2'
 gem 'vfs', :git => 'git://github.com/momolog/vfs.git'
 gem 'vos', :git => 'git://github.com/momolog/vos.git'
 gem 'net-ssh', '~> 2.9.1'
