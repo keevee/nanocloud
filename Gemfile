@@ -1,11 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
-
-if RUBY_VERSION =~ /1.9/
-  Encoding.default_external = Encoding::UTF_8
-  Encoding.default_internal = Encoding::UTF_8
-end
+ruby '2.2.0'
 
 gem 'rails',    '~> 3.2.0'
 gem 'firebase', '~> 0.1.4'
@@ -17,8 +12,7 @@ gem 'nanoc', '~> 3.6.3'
 gem 'nanoc-cachebuster', :git => 'git://github.com/keevee/nanoc-cachebuster.git'
 gem 'w3c_validators'
 
-# newer nokogiri versions give: Incompatible library version: nokogiri.bundle requires version 11.0.0 or later, but libxml2.2.dylib provides version 10.0.0
-gem 'nokogiri', '~> 1.4.7'
+gem 'nokogiri'
 
 gem 'pg'
 gem 'heroku-api'
@@ -30,7 +24,7 @@ end
 group :test do
   gem 'rspec-rails', '~> 2.10.1'
   gem 'factory_girl_rails'
-  gem 'debugger'
+  gem 'byebug'
 end
 
 gem 'slim'
