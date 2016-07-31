@@ -22,8 +22,8 @@ group :development do
 end
 
 group :test do
-  gem 'test-unit'
   gem 'rspec-rails'
+  gem 'test-unit', '~> 3.0'
   gem 'factory_girl_rails'
   gem 'byebug'
 end
