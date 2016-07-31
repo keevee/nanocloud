@@ -22,10 +22,11 @@ class NanocController < ApplicationController
         @website.update_attribute :delayed_job_id, job.id
         data[:job_id] = job.id
       else
+        p "!>> Website #{params[:name]} not connected to user #{current_user}."
         @output = "You are not connected to a website yet. Please <a href='mailto:post@momolog.info'>contact us</a> to set up your account.".html_safe
       end
     else
-      Rails.logger.warn "Website not found #{params[:name]}"
+      p "!>> Website not found #{params[:name]}"
     end
 
     redirect_to({:action => :index}.merge(data))
