@@ -17,8 +17,6 @@ gem 'nokogiri'
 gem 'pg'
 gem 'heroku-api'
 
-gem 'test-unit', '~> 3.0'
-
 group :development do
   gem 'sqlite3'
 end
@@ -27,6 +25,7 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'byebug'
+  gem 'test-unit', '~> 3.0'
 end
 
 gem 'slim'
@@ -83,5 +82,5 @@ gem "jquery-rails", "< 3.0.0"
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-gem "devise", "~> 2.2"
+gem "devise"
 gem "activeadmin", "~> 0.5.0"
