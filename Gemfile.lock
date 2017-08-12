@@ -116,7 +116,7 @@ GEM
     erubis (2.7.0)
     ethon (0.8.1)
       ffi (>= 1.3.0)
-    excon (0.49.0)
+    excon (0.58.0)
     execjs (2.6.0)
     factory_girl (4.7.0)
       activesupport (>= 3.0.0)
@@ -135,9 +135,10 @@ GEM
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
-    heroku-api (0.4.2)
-      excon (~> 0.45)
-      multi_json (~> 1.8)
+    heroics (0.0.23)
+      erubis (~> 2.0)
+      excon
+      multi_json (>= 1.9.2)
     hike (1.2.3)
     httparty (0.13.7)
       json (~> 1.8)
@@ -170,6 +171,7 @@ GEM
       polyamorous (~> 0.5.0)
     mime-types (1.25.1)
     mini_portile2 (2.0.0)
+    moneta (0.8.1)
     multi_json (1.12.1)
     multi_xml (0.5.5)
     nanoc (3.6.11)
@@ -181,6 +183,9 @@ GEM
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
     pg (0.18.4)
+    platform-api (2.1.0)
+      heroics (~> 0.0.23)
+      moneta (~> 0.8.1)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.5)
@@ -295,7 +300,6 @@ DEPENDENCIES
   factory_girl_rails
   firebase (~> 0.1.4)
   haml
-  heroku-api
   jquery-rails (< 3.0.0)
   jsmin (~> 1.0)
   kramdown (~> 0.13)
@@ -307,6 +311,7 @@ DEPENDENCIES
   net-ssh (~> 2.9.1)
   nokogiri
   pg
+  platform-api
   rack (~> 1.2)
   rails (~> 3.2.0)
   rails_12factor
@@ -323,5 +328,8 @@ DEPENDENCIES
   vos!
   w3c_validators
 
+RUBY VERSION
+   ruby 2.2.2p95
+
 BUNDLED WITH
-   1.11.2
+   1.14.6
