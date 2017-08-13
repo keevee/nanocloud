@@ -18,7 +18,7 @@ gem 'pg'
 
 # for heroku, see
 # https://stackoverflow.com/questions/13828889/rails-3-heroku-cannot-load-such-file-test-unit-testcase-loaderror
-gem 'test-unit'
+gem 'test-unit', '~> 3.0'
 
 group :development do
   gem 'sqlite3'
@@ -28,7 +28,6 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'byebug'
-  gem 'test-unit', '~> 3.0'
 end
 
 gem 'slim'
