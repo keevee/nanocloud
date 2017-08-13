@@ -1,18 +1,16 @@
 require 's3_bucket'
 require 'sftp_bucket'
 require 'managed_job'
-require 'heroku_manager'
 
 class NanocCompilationException < Exception
 end
 
-class CompilerJob < ManagedJob
+class CompilerJob
   attr_accessor :website_id, :preview
 
   def initialize(website_id, preview=true)
     self.website_id = website_id
     self.preview    = preview
-    super()
   end
 
   def perform

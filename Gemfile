@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.0'
+ruby '2.2.2'
 
 gem 'rails',    '~> 3.2.0'
 gem 'firebase', '~> 0.1.4'
@@ -15,7 +15,6 @@ gem 'w3c_validators'
 gem 'nokogiri'
 
 gem 'pg'
-gem 'heroku-api'
 
 group :development do
   gem 'sqlite3'
