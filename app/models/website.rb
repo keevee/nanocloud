@@ -1,6 +1,5 @@
 require 's3_bucket'
 require 'sftp_bucket'
-require 'managed_job'
 
 class NanocCompilationException < Exception
 end
