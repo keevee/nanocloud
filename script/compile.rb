@@ -29,4 +29,4 @@ end
 
 puts "compiling..."
 
-puts `nanoc co`
+puts `bundle exec nanoc co`
