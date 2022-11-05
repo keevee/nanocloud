@@ -15,7 +15,7 @@
 #   because “*” matches zero or more characters.
 
 RAW_FILES       = %w{ sass coffee }
-MEDIA           = %w{ png jpg jpeg gif ico pdf mp4 mov webm svg}
+MEDIA           = %w{ png jpg jpeg gif ico pdf mp4 mov webm svg woff2}
 COMPILED_FILES  = %w{ js css html txt cur }
 
 # preprocessing, here we are setting up the category pages and the submenu for categorized pages
